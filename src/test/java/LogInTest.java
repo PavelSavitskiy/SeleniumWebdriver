@@ -10,6 +10,7 @@ public class LogInTest {
 
     private DriverWrapper driverWrapper = new DriverWrapper();
     MainPage mainPage = new MainPage(driverWrapper.getDriver());
+    LoginPage loginPage = new LoginPage(driverWrapper.getDriver());
 
     @BeforeTest
     public void setUp() {
@@ -25,7 +26,6 @@ public class LogInTest {
     void logIn() {
         driverWrapper.driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
         mainPage.clickButtons(Property.loginButton);
-        LoginPage loginPage = new LoginPage(driverWrapper.getDriver());
         loginPage.logInFillInForms(Property.login, Property.password);
         Assert.assertTrue(loginPage.driver.findElements(By.xpath(Property.userNameShower)).size() > 0);
     }
