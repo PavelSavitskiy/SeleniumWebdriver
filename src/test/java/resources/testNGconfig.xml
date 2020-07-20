@@ -1,11 +1,11 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
 <suite name="Suite1" verbose="1" thread-count="1">
-    <test name="Nopackage" >
+    <test name="Test1" >
         <classes>
             <class name="LogInTest" />
             <class name="AddGoodsToCart" />
-            <!--<class name="CityTest" />-->
+            <class name="PasswordChangeTest" />
             <class name="SearchPageTest" />
         </classes>
     </test>

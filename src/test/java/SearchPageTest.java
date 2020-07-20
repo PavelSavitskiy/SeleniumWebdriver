@@ -1,10 +1,5 @@
-import org.openqa.selenium.By;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
-
-import java.io.Serializable;
+import org.testng.annotations.*;
 
 public class SearchPageTest {
 
@@ -13,21 +8,22 @@ public class SearchPageTest {
     SearchPage searchPage = new SearchPage(driverWrapper.getDriver());
     int results;
 
-    @BeforeTest
+    @BeforeClass
     public void setUp() {
         driverWrapper.init();
     }
 
 
-    @AfterTest
+    @AfterClass
     public void tearDown() {
         driverWrapper.close();
     }
+
     @Test
-    public void search(){
+    public void search() {
         mainPage.search("Книга");
-        results= searchPage.getResults().size();
-        Assert.assertEquals(results,60);
+        results = searchPage.getResults().size();
+        Assert.assertEquals(results, 60);
 
     }
 }

@@ -20,13 +20,6 @@ public class Property {
     public static  String addToCartButton = "//input[@value='Добавить в корзину']";
     public static  String closeCartDialogWindow = "//a[contains(text(),'Закрыть')]";
     public static String deleteGoodsButton ="//a[contains (text(), 'Удалить')]";
-    ///////////CITIES VARIABLES///////////////////////
-    public static String cityArea= "//div[@class='cell']/div[@class='p500']";
-    public static String cityForm= "//input[@placeholder ='начните вводить']";
-    public static String chooseDropCity1= "(//li/a[@data-location-id])[1]/..";
-    ////////////COMMENTS VARIABLES////////////////////
-    public static String counterForReviews= "//div[@class='cell']/p";
-    public static String searchGoodsGorReview ="Вальтер Скотт";
     ////////////MY SECTION//////////////////////////
     public static String userSection = "//span[contains(text(),'Мой раздел')]";
 }

@@ -11,12 +11,10 @@ public class DriverWrapper {
 
     public DriverWrapper() {
         System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\src\\main\\resources\\chromedriver.exe");
-        this.driver = new ChromeDriver();
-        /*driver.manage().timeouts().implicitlyWait(1000, TimeUnit.MILLISECONDS);
-        driver.manage().timeouts().setScriptTimeout(1000, TimeUnit.MILLISECONDS);
-        driver.manage().timeouts().pageLoadTimeout(1000, TimeUnit.MILLISECONDS);*/
-         wait = new WebDriverWait(driver, 10);
 
+        this.driver = new ChromeDriver();
+        this.wait = new WebDriverWait(driver, 10);
+        this.driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
     public void init() {

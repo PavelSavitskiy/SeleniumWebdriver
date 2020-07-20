@@ -1,8 +1,6 @@
 import org.openqa.selenium.By;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.util.concurrent.TimeUnit;
 
@@ -12,19 +10,18 @@ public class LogInTest {
     MainPage mainPage = new MainPage(driverWrapper.getDriver());
     LoginPage loginPage = new LoginPage(driverWrapper.getDriver());
 
-    @BeforeTest
+    @BeforeClass
     public void setUp() {
         driverWrapper.init();
     }
 
-    @AfterTest
+    @AfterClass
     public void tearDown() {
         driverWrapper.close();
     }
 
     @Test
     void logIn() {
-        driverWrapper.driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
         mainPage.clickButtons(Property.loginButton);
         loginPage.logInFillInForms(Property.login, Property.password);
         Assert.assertTrue(loginPage.driver.findElements(By.xpath(Property.userNameShower)).size() > 0);

@@ -1,5 +1,6 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
 import java.util.concurrent.TimeUnit;
 
 public class MainPage {
@@ -14,6 +15,7 @@ public class MainPage {
         driver.manage().timeouts().implicitlyWait(100, TimeUnit.SECONDS);
         driver.findElement(By.xpath(buttonName)).click();
     }
+
     public void search(String request) {
 
         driver.findElement(By.id(Property.searchField)).sendKeys(request);

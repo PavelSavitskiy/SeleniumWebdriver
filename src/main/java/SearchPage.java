@@ -20,7 +20,8 @@ public class SearchPage {
         driver.findElement(By.xpath(Property.addToCartButton)).click();
         driver.findElement(By.xpath(Property.closeCartDialogWindow)).click();
     }
-    public List<WebElement> getResults(){
+
+    public List<WebElement> getResults() {
         return driver.findElements(By.cssSelector(Property.searchResults));
     }
 

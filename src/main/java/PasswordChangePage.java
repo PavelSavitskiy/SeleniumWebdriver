@@ -7,11 +7,12 @@ public class PasswordChangePage {
     public PasswordChangePage(WebDriver driver) {
         this.driver = driver;
     }
-    public void changePassword(String oldPassword, String newPassword){
+
+    public void changePassword(String oldPassword, String newPassword) {
         this.driver.findElement(By.cssSelector("[name=old_password]")).sendKeys(oldPassword);
         this.driver.findElement(By.cssSelector("[name=new_password]")).sendKeys(newPassword);
         this.driver.findElement(By.cssSelector("[name=retry_password]")).sendKeys(newPassword);
         this.driver.findElement(By.cssSelector("input[value='Сохранить']")).click();
-        //Property.password = newPassword;
+
     }
 }
