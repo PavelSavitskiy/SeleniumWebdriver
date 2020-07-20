@@ -27,6 +27,8 @@ public class CategoryFilterTest {
         driverWrapper.wait.until(ExpectedConditions.stalenessOf(driverWrapper.driver.findElement(By.xpath
                 ("//div[contains(text(),'Скоро в продаже')]"))));
         quantityOfGoodsOnPage = searchPage.getResults().size();
+        inStockFilter = searchPage.driver.findElements(By.xpath("//span[contains(text(),'На складе')]")).size();
+        authorFilter = searchPage.driver.findElements(By.xpath(" //div[@class='add-info']/span[contains(text(),'Р. Брэдбери')]")).size();
     }
 
     @AfterClass
@@ -36,13 +38,11 @@ public class CategoryFilterTest {
 
     @Test
     public void inStockFilterTest() {
-        inStockFilter = searchPage.driver.findElements(By.xpath("//span[contains(text(),'На складе')]")).size();
         Assert.assertEquals(quantityOfGoodsOnPage, inStockFilter);
     }
 
     @Test
     public void authorFilterTest()  {
-        authorFilter = searchPage.driver.findElements(By.xpath(" //div[@class='add-info']/span[contains(text(),'Р. Брэдбери')]")).size();
         Assert.assertEquals(quantityOfGoodsOnPage, authorFilter);
     }
 }
