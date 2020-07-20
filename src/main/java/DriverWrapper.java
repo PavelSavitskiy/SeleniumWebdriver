@@ -6,15 +6,17 @@ import java.util.concurrent.TimeUnit;
 
 public class DriverWrapper {
     WebDriver driver;
-    WebDriverWait wait;
+    public WebDriverWait wait;
 
 
     public DriverWrapper() {
         System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\src\\main\\resources\\chromedriver.exe");
 
         this.driver = new ChromeDriver();
-        this.wait = new WebDriverWait(driver, 10);
-        this.driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        this.wait = new WebDriverWait(driver, 20);
+        this.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        //this.driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+        //this.driver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
     }
 
     public void init() {

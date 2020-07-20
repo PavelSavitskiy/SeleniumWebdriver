@@ -15,6 +15,7 @@ public class PasswordChangeTest {
     LoginPage loginPage = new LoginPage(driverWrapper.getDriver());
     UserSectionPage userSectionPage = new UserSectionPage(driverWrapper.getDriver());
     PasswordChangePage passwordChangePage = new PasswordChangePage(driverWrapper.getDriver());
+    Actions mouseHover = new Actions(driverWrapper.getDriver());
     String newPassword = "selenium";
 
     @BeforeClass
@@ -37,7 +38,6 @@ public class PasswordChangeTest {
         mainPage.clickButtons(Property.userSection);
         userSectionPage.chooseSubSection("Изменить пароль").click();
         passwordChangePage.changePassword(Property.password, newPassword);
-        Actions mouseHover = new Actions(driverWrapper.getDriver());
         mouseHover.moveToElement(driverWrapper.driver.findElement(By.xpath("//span[contains (text(),'Мой раздел')]"))).perform();
         mainPage.clickButtons("//a[contains(text(),'Выйти')]");
         mainPage.clickButtons(Property.loginButton);

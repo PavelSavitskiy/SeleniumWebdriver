@@ -7,6 +7,7 @@
             <class name="AddGoodsToCartTest" />
             <class name="PasswordChangeTest" />
             <class name="SearchPageTest" />
+            <class name="CategoryFilterTest"/>
         </classes>
     </test>
 
