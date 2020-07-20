@@ -41,7 +41,7 @@ public class CategoryFilterTest {
     }
 
     @Test
-    public void authorFilterTest() {
+    public void authorFilterTest()  {
         authorFilter = searchPage.driver.findElements(By.xpath(" //div[@class='add-info']/span[contains(text(),'Р. Брэдбери')]")).size();
         Assert.assertEquals(quantityOfGoodsOnPage, authorFilter);
     }
