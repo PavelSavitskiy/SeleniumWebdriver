@@ -1,17 +1,19 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 
 public class SearchPage extends Page {
 
-    public SearchPage(WebDriver driver) {
-        super(driver);
+    public SearchPage(WebDriver driver, WebDriverWait wait) {
+        super(driver,wait);
     }
 
     public void addGoods(By linkToGoodsFromList) {
         clickElements(linkToGoodsFromList);
+        getWait().until(ExpectedConditions.elementToBeClickable(Property.addToCartButton));
         clickElements(Property.addToCartButton);
         clickElements(Property.closeCartDialogWindow);
     }
