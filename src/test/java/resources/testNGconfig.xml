@@ -4,11 +4,10 @@
     <test name="Test1" >
         <classes>
             <class name="LogInTest" />
-            <class name="AddGoodsToCartTest" />
-            <class name="PasswordChangeTest" />
             <class name="SearchPageTest" />
             <class name="CategoryFilterTest"/>
+            <class name="AddGoodsToCartTest" />
+            <class name="PasswordChangeTest" />
         </classes>
     </test>
-
 </suite>

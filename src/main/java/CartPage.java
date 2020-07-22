@@ -2,22 +2,25 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class CartPage {
-    int currentQuantityOfGoods;
-    final WebDriver driver;
+public class CartPage extends Page {
+    private int currentQuantityOfGoods;
+
+    public int getCurQuantOfGoods() {
+        return currentQuantityOfGoods;
+    }
 
     public CartPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     public void countGoods() {
-        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
-        List<WebElement> listOfGoods = new ArrayList<WebElement>();
-        listOfGoods = driver.findElements(By.xpath(Property.deleteGoodsButton));
+        getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        List<WebElement> listOfGoods;
+        listOfGoods = getDriver().findElements(Property.deleteGoodsButton);
         currentQuantityOfGoods = listOfGoods.size();
+        getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 }

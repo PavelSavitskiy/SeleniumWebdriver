@@ -5,8 +5,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.concurrent.TimeUnit;
 
 public class DriverWrapper {
-    WebDriver driver;
-    public WebDriverWait wait;
+    private final WebDriver driver;
+    private final WebDriverWait wait;
 
 
     public DriverWrapper() {
@@ -15,8 +15,6 @@ public class DriverWrapper {
         this.driver = new ChromeDriver();
         this.wait = new WebDriverWait(driver, 20);
         this.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        //this.driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-        //this.driver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
     }
 
     public void init() {
@@ -27,7 +25,11 @@ public class DriverWrapper {
         return driver;
     }
 
-    public void close() {
+    public WebDriverWait getWait() {
+        return wait;
+    }
+
+    public void stopBrowser() {
         this.driver.quit();
     }
 }

@@ -2,14 +2,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class UserSectionPage {
-
-    final WebDriver driver;
+public class UserSectionPage extends Page {
 
     public UserSectionPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
-    public WebElement chooseSubSection(String subSectionName){
-        return this.driver.findElement(By.partialLinkText(subSectionName));
+
+    public WebElement chooseSubSection(String subSectionName) {
+        return getDriver().findElement(By.partialLinkText(subSectionName));
     }
 }

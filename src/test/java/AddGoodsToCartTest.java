@@ -1,43 +1,33 @@
 import org.openqa.selenium.By;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterClass;
 
-import java.util.concurrent.TimeUnit;
-
-public class AddGoodsToCartTest {
-
-    private DriverWrapper driverWrapper = new DriverWrapper();
-    MainPage mainPage = new MainPage(driverWrapper.getDriver());
-    LoginPage loginPage = new LoginPage(driverWrapper.getDriver());
-    CartPage cartPage = new CartPage(driverWrapper.getDriver());
-    SearchPage searchPage = new SearchPage(driverWrapper.getDriver());
+public class AddGoodsToCartTest extends BasicTest {
     private int quantityOfGoodsBefore;
 
-    @BeforeClass
+    @BeforeClass(description = "Log in")
     public void setUp() {
-        driverWrapper.init();
-        mainPage.clickButtons(Property.loginButton);
+        mainPage.clickElements(Property.loginButton);
         loginPage.logInFillInForms(Property.login, Property.password);
     }
 
-
-    @AfterClass
+    @AfterClass(description = "Delete added goods")
     public void tearDown() {
-
-        driverWrapper.driver.findElement(By.xpath(Property.deleteGoodsButton)).click();
-        driverWrapper.close();
+        searchPage.clickElements(Property.deleteGoodsButton);
     }
 
-    @Test
+    @Test(description = "Check that goods were added")
     public void addingGoodsTest() {
-        mainPage.clickButtons(Property.cartButton);
+        mainPage.clickElements(Property.cartButton);
         cartPage.countGoods();
-        quantityOfGoodsBefore = cartPage.currentQuantityOfGoods;
+        quantityOfGoodsBefore = cartPage.getCurQuantOfGoods();
         mainPage.search(Property.goodsPeanutButter);
         searchPage.addGoods(Property.chooseGoodsFromTheList);
-        mainPage.clickButtons(Property.cartButton);
+        mainPage.clickElements(Property.cartButton);
         cartPage.countGoods();
-        Assert.assertEquals(cartPage.currentQuantityOfGoods, quantityOfGoodsBefore + 1);
-
+        Assert.assertEquals(cartPage.getCurQuantOfGoods(), quantityOfGoodsBefore + 1,
+                "Quantity of goods after adding new one is incorrect");
     }
 }

@@ -1,29 +1,15 @@
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.Test;
 
-public class SearchPageTest {
+public class SearchPageTest extends BasicTest {
+    private final int ITEMS_ON_SEARCH_PAGE_QUANTITY = 60;
+    private int results;
 
-    private DriverWrapper driverWrapper = new DriverWrapper();
-    MainPage mainPage = new MainPage(driverWrapper.getDriver());
-    SearchPage searchPage = new SearchPage(driverWrapper.getDriver());
-    int results;
-
-    @BeforeClass
-    public void setUp() {
-        driverWrapper.init();
-    }
-
-
-    @AfterClass
-    public void tearDown() {
-        driverWrapper.close();
-    }
-
-    @Test
+    @Test(description = "Check quantity of items on search page")
     public void search() {
         mainPage.search("Книга");
         results = searchPage.getResults().size();
-        Assert.assertEquals(results, 60);
-
+        Assert.assertEquals(results, ITEMS_ON_SEARCH_PAGE_QUANTITY,
+                "The quantity of items on page isn't correct. ");
     }
 }

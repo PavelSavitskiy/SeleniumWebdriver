@@ -1,49 +1,35 @@
 import org.openqa.selenium.By;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
+public class PasswordChangeTest extends BasicTest {
+    private final String NEW_PASSWORD = "selenium";
 
-public class PasswordChangeTest {
-
-    private DriverWrapper driverWrapper = new DriverWrapper();
-    MainPage mainPage = new MainPage(driverWrapper.getDriver());
-    LoginPage loginPage = new LoginPage(driverWrapper.getDriver());
-    UserSectionPage userSectionPage = new UserSectionPage(driverWrapper.getDriver());
-    PasswordChangePage passwordChangePage = new PasswordChangePage(driverWrapper.getDriver());
-    Actions mouseHover = new Actions(driverWrapper.getDriver());
-    String newPassword = "selenium";
-
-    @BeforeClass
+    @BeforeClass(description = "Login")
     public void setUp() {
-        driverWrapper.init();
-        mainPage.clickButtons(Property.loginButton);
+        mainPage.clickElements(Property.loginButton);
         loginPage.logInFillInForms(Property.login, Property.password);
     }
 
-    @AfterClass
+    @AfterClass(description = "Change password to old one")
     public void tearDown() {
-        mainPage.clickButtons(Property.userSection);
+        mainPage.clickElements(Property.userSection);
         userSectionPage.chooseSubSection("Изменить пароль").click();
-        passwordChangePage.changePassword(newPassword, Property.password);
-        driverWrapper.close();
+        passwordChangePage.changePassword(NEW_PASSWORD, Property.password);
     }
 
-    @Test
+    @Test(description = "Change password, then log out, then log in with new one")
     public void passwordChangeTest() {
-        mainPage.clickButtons(Property.userSection);
+        mainPage.clickElements(Property.userSection);
         userSectionPage.chooseSubSection("Изменить пароль").click();
-        passwordChangePage.changePassword(Property.password, newPassword);
-        mouseHover.moveToElement(driverWrapper.driver.findElement(By.xpath("//span[contains (text(),'Мой раздел')]"))).perform();
-        mainPage.clickButtons("//a[contains(text(),'Выйти')]");
-        mainPage.clickButtons(Property.loginButton);
-        loginPage.logInFillInForms(Property.login, newPassword);
-        Assert.assertTrue(loginPage.driver.findElements(By.xpath(Property.userNameShower)).size() > 0);
-
-
+        passwordChangePage.changePassword(Property.password, NEW_PASSWORD);
+        mouseHover.moveToElement(driver.findElement(By.xpath(Property.userSectionString))).perform();
+        mainPage.clickElements(Property.logoutButton);
+        mainPage.clickElements(Property.loginButton);
+        loginPage.logInFillInForms(Property.login, NEW_PASSWORD);
+        Assert.assertTrue(isElementPresent(Property.userNameShower),
+                "Password wasn't changed properly");
     }
 }
