@@ -23,5 +23,3 @@ public class CartPage extends Page {
         getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 }
-////////// I just type smth to check git
-//////one more
