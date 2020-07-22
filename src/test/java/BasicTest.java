@@ -8,7 +8,7 @@ import org.testng.annotations.BeforeClass;
 
 import java.util.concurrent.TimeUnit;
 
-public class BasicTest {
+public abstract class BasicTest {
     WebDriver driver;
     WebDriverWait wait;
     LoginPage loginPage;
@@ -27,12 +27,12 @@ public class BasicTest {
         this.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get(Property.homepage);
 
-        mainPage = new MainPage(driver);
-        userSectionPage = new UserSectionPage(driver);
-        passwordChangePage = new PasswordChangePage(driver);
-        loginPage = new LoginPage(driver);
-        searchPage = new SearchPage(driver);
-        cartPage = new CartPage(driver);
+        mainPage = new MainPage(driver,wait);
+        userSectionPage = new UserSectionPage(driver,wait);
+        passwordChangePage = new PasswordChangePage(driver,wait);
+        loginPage = new LoginPage(driver,wait);
+        searchPage = new SearchPage(driver,wait);
+        cartPage = new CartPage(driver,wait);
         mouseHover = new Actions(driver);
     }
 
