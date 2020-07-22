@@ -24,3 +24,4 @@ public class CartPage extends Page {
     }
 }
 ////////// I just type smth to check git
+//////one more
