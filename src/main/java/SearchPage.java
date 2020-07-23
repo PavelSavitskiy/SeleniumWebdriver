@@ -1,6 +1,8 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -10,10 +12,18 @@ public class SearchPage extends Page {
         super(driver);
     }
 
-    public void addGoods(By linkToGoodsFromList) {
+    public SearchPage addGoods(By linkToGoodsFromList) {
         clickElements(linkToGoodsFromList);
+        new WebDriverWait(getDriver(), 10).until(ExpectedConditions.elementToBeClickable(Property.addToCartButton));
         clickElements(Property.addToCartButton);
         clickElements(Property.closeCartDialogWindow);
+        return this;
+    }
+
+    public SearchPage chooseFilterWithInputField(By filterLocator, String request, By foundListLocator) {
+        sendKeysTeElement(filterLocator, request);
+        clickElements(foundListLocator);
+        return new SearchPage(getDriver());
     }
 
     public List<WebElement> getResults() {

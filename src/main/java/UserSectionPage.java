@@ -8,7 +8,8 @@ public class UserSectionPage extends Page {
         super(driver);
     }
 
-    public WebElement chooseSubSection(String subSectionName) {
-        return getDriver().findElement(By.partialLinkText(subSectionName));
+    public PasswordChangePage chooseChangePasswordSubSection() {
+        getDriver().findElement(Property.changePasswordSubsection).click();
+        return new PasswordChangePage(getDriver());
     }
 }

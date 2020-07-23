@@ -8,7 +8,7 @@ import org.testng.annotations.BeforeClass;
 
 import java.util.concurrent.TimeUnit;
 
-public class BasicTest {
+public abstract class BasicTest {
     WebDriver driver;
     WebDriverWait wait;
     LoginPage loginPage;
@@ -36,12 +36,8 @@ public class BasicTest {
         mouseHover = new Actions(driver);
     }
 
-    @AfterClass(description ="Close browser")
+    @AfterClass(description = "Close browser")
     public void tearDowns() {
         driver.quit();
-    }
-
-    public boolean isElementPresent(By locator) {
-        return (driver.findElements(locator).size() > 0);
     }
 }

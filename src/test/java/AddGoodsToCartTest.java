@@ -6,11 +6,11 @@ import org.testng.annotations.AfterClass;
 
 public class AddGoodsToCartTest extends BasicTest {
     private int quantityOfGoodsBefore;
+    private int currentQuantityOfGoods;
 
     @BeforeClass(description = "Log in")
     public void setUp() {
-        mainPage.clickElements(Property.loginButton);
-        loginPage.logInFillInForms(Property.login, Property.password);
+        mainPage.goToLoginPage().logInFillInForms(Property.login, Property.password);
     }
 
     @AfterClass(description = "Delete added goods")
@@ -20,14 +20,10 @@ public class AddGoodsToCartTest extends BasicTest {
 
     @Test(description = "Check that goods were added")
     public void addingGoodsTest() {
-        mainPage.clickElements(Property.cartButton);
-        cartPage.countGoods();
-        quantityOfGoodsBefore = cartPage.getCurQuantOfGoods();
-        mainPage.search(Property.goodsPeanutButter);
-        searchPage.addGoods(Property.chooseGoodsFromTheList);
-        mainPage.clickElements(Property.cartButton);
-        cartPage.countGoods();
-        Assert.assertEquals(cartPage.getCurQuantOfGoods(), quantityOfGoodsBefore + 1,
+        quantityOfGoodsBefore = mainPage.goToCart().countGoods().getCurQuantOfGoods();
+        mainPage.search(Property.goodsPeanutButter).addGoods(Property.chooseGoodsFromTheList);
+        currentQuantityOfGoods = searchPage.goToCart().countGoods().getCurQuantOfGoods();
+        Assert.assertEquals(currentQuantityOfGoods, quantityOfGoodsBefore + 1,
                 "Quantity of goods after adding new one is incorrect");
     }
 }

@@ -7,8 +7,7 @@ public class SearchPageTest extends BasicTest {
 
     @Test(description = "Check quantity of items on search page")
     public void search() {
-        mainPage.search("Книга");
-        results = searchPage.getResults().size();
+        results = mainPage.search("Книга").getResults().size();
         Assert.assertEquals(results, ITEMS_ON_SEARCH_PAGE_QUANTITY,
                 "The quantity of items on page isn't correct. ");
     }

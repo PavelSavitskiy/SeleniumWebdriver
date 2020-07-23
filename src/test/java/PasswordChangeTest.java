@@ -9,27 +9,20 @@ public class PasswordChangeTest extends BasicTest {
 
     @BeforeClass(description = "Login")
     public void setUp() {
-        mainPage.clickElements(Property.loginButton);
-        loginPage.logInFillInForms(Property.login, Property.password);
+        loginPage = mainPage.goToLoginPage().logInFillInForms(Property.login, Property.password);
     }
 
     @AfterClass(description = "Change password to old one")
     public void tearDown() {
-        mainPage.clickElements(Property.userSection);
-        userSectionPage.chooseSubSection("Изменить пароль").click();
-        passwordChangePage.changePassword(NEW_PASSWORD, Property.password);
+        mainPage.goToUserSectionPage().chooseChangePasswordSubSection().changePassword(NEW_PASSWORD, Property.password);
     }
 
     @Test(description = "Change password, then log out, then log in with new one")
     public void passwordChangeTest() {
-        mainPage.clickElements(Property.userSection);
-        userSectionPage.chooseSubSection("Изменить пароль").click();
+        passwordChangePage = mainPage.goToUserSectionPage().chooseChangePasswordSubSection();
         passwordChangePage.changePassword(Property.password, NEW_PASSWORD);
-        mouseHover.moveToElement(driver.findElement(By.xpath(Property.userSectionString))).perform();
-        mainPage.clickElements(Property.logoutButton);
-        mainPage.clickElements(Property.loginButton);
-        loginPage.logInFillInForms(Property.login, NEW_PASSWORD);
-        Assert.assertTrue(isElementPresent(Property.userNameShower),
+        passwordChangePage.logOut().goToLoginPage().logInFillInForms(Property.login, NEW_PASSWORD);
+        Assert.assertTrue(mainPage.isElementPresent(Property.userNameShower),
                 "Password wasn't changed properly");
     }
 }

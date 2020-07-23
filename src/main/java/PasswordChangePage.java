@@ -7,10 +7,11 @@ public class PasswordChangePage extends Page {
         super(driver);
     }
 
-    public void changePassword(String oldPassword, String newPassword) {
+    public PasswordChangePage changePassword(String oldPassword, String newPassword) {
         getDriver().findElement(By.cssSelector("[name=old_password]")).sendKeys(oldPassword);
         getDriver().findElement(By.cssSelector("[name=new_password]")).sendKeys(newPassword);
         getDriver().findElement(By.cssSelector("[name=retry_password]")).sendKeys(newPassword);
         getDriver().findElement(By.cssSelector("input[value='Сохранить']")).click();
+        return this;
     }
 }

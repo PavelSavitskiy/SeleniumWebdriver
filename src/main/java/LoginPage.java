@@ -6,9 +6,10 @@ public class LoginPage extends Page {
         super(driver);
     }
 
-    public void logInFillInForms(String login, String password) {
+    public LoginPage logInFillInForms(String login, String password) {
         sendKeysTeElement(Property.loginField, login);
         sendKeysTeElement(Property.passwordField, password);
         clickElements(Property.loginSubmitButton);
+        return this;
     }
 }
