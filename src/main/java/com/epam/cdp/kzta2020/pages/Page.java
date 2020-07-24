@@ -1,3 +1,5 @@
+package com.epam.cdp.kzta2020.pages;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
@@ -5,10 +7,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class Page {
-    private final WebDriver driver;
+    protected   WebDriver driver;
 
-    public Page(WebDriver driver) {
-        this.driver = driver;
+    public Page() {
+        this.driver = DriverSingleton.getWebDriverSingleton();
     }
 
     public WebDriver getDriver() {
@@ -16,24 +18,24 @@ public abstract class Page {
     }
 
     public CartPage goToCart() {
-        clickElements(Property.cartButton);
-        return new CartPage(getDriver());
+        clickElements(LocatorsHolder.CART_BUTTON);
+        return new CartPage();
     }
 
     public UserSectionPage goToUserSectionPage() {
-        clickElements(Property.userSection);
-        return new UserSectionPage(getDriver());
+        clickElements(LocatorsHolder.USER_SECTION);
+        return new UserSectionPage();
     }
 
     public LoginPage goToLoginPage() {
-        clickElements(Property.loginButton);
-        return new LoginPage(getDriver());
+        clickElements(LocatorsHolder.LOGIN_BUTTON);
+        return new LoginPage();
     }
 
     public MainPage logOut() {
-        navigateMousePointerToElement(Property.userSection);
-        clickElements(Property.logoutButton);
-        return new MainPage(getDriver());
+        navigateMousePointerToElement(LocatorsHolder.USER_SECTION);
+        clickElements(LocatorsHolder.LOGOUT_BUTTON);
+        return new MainPage();
     }
 
     public void navigateMousePointerToElement(By elementLocator) {

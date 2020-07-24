@@ -1,11 +1,8 @@
+package com.epam.cdp.kzta2020.pages;
+
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 
 public class PasswordChangePage extends Page {
-
-    public PasswordChangePage(WebDriver driver) {
-        super(driver);
-    }
 
     public PasswordChangePage changePassword(String oldPassword, String newPassword) {
         getDriver().findElement(By.cssSelector("[name=old_password]")).sendKeys(oldPassword);

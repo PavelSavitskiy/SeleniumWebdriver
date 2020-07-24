@@ -3,11 +3,11 @@
 <suite name="Suite1" verbose="1" thread-count="1">
     <test name="Test1" >
         <classes>
-            <class name="LogInTest" />
-            <class name="SearchPageTest" />
-            <class name="CategoryFilterTest"/>
-            <class name="AddGoodsToCartTest" />
-            <class name="PasswordChangeTest" />
+            <class name="com.epam.cdp.kzta2020.tests.LogInTest" />
+            <class name="com.epam.cdp.kzta2020.tests.SearchPageTest" />
+            <class name="com.epam.cdp.kzta2020.tests.CategoryFilterTest"/>
+            <class name="com.epam.cdp.kzta2020.tests.AddGoodsToCartTest" />
+            <class name="com.epam.cdp.kzta2020.tests.PasswordChangeTest" />
         </classes>
     </test>
 </suite>
