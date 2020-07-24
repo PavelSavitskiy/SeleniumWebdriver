@@ -9,7 +9,7 @@ public class LogInTest extends BasicTest {
 
     @Test(description = "Notify that login was completed")
     void logIn() {
-        loginPage = new MainPage(). goToLoginPage().logInFillInForms(LocatorsHolder.LOGIN, LocatorsHolder.PASSWORD);
+        loginPage = new MainPage().goToLoginPage().logInFillInForms(LocatorsHolder.LOGIN, LocatorsHolder.PASSWORD);
         Assert.assertTrue(mainPage.isElementPresent(LocatorsHolder.USER_NAME_SHOWER),
                 "Login wasn't completed");
     }

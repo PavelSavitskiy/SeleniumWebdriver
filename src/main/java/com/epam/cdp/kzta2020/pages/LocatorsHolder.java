@@ -6,7 +6,7 @@ public class LocatorsHolder {
 
     ////////////LOGIN VARIABLES//////////////
     public static String homepage = "https://www.flip.kz/";
-    public static final   By LOGIN_BUTTON = By.xpath("//span[contains (text(),'Войти')]/..");
+    public static final By LOGIN_BUTTON = By.xpath("//span[contains (text(),'Войти')]/..");
     public static final By LOGOUT_BUTTON = By.xpath("//a[contains(text(),'Выйти')]");
     public static final String LOGIN = "sav.psavel.sav@gmail.com";
     public static final String PASSWORD = "seleniumWeb";

@@ -14,7 +14,7 @@ public class AddGoodsToCartTest extends BasicTest {
 
     @BeforeClass(description = "Log in")
     public void setUp() {
-        loginPage = mainPage. goToLoginPage().logInFillInForms(LOGIN, LocatorsHolder.PASSWORD);
+        loginPage = mainPage.goToLoginPage().logInFillInForms(LOGIN, LocatorsHolder.PASSWORD);
     }
 
     @AfterClass(description = "Delete added goods")
