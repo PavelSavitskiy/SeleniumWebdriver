@@ -48,6 +48,10 @@ public abstract class Page {
                 stalenessOf(getDriver().findElement(locator)));
     }
 
+    public static By  chooseGoodsFromListAfterSearch (int number){   //where "number" is ordinal number of goods on the search page
+        return  By.xpath( String.format("(//div[@class ='good-list-item ']/div/a)[%d]",number));
+    }
+
     public boolean isElementPresent(By locator) {
         return (getDriver().findElements(locator).size() > 0);
     }

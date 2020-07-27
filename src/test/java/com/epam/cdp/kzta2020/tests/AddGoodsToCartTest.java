@@ -1,6 +1,7 @@
 package com.epam.cdp.kzta2020.tests;
 
 import com.epam.cdp.kzta2020.pages.LocatorsHolder;
+import com.epam.cdp.kzta2020.pages.Page;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeClass;
@@ -25,7 +26,7 @@ public class AddGoodsToCartTest extends BasicTest {
     @Test(description = "Check that goods were added")
     public void addingGoodsTest() {
         quantityOfGoodsBefore = mainPage.goToCart().countGoods().getCurQuantOfGoods();
-        mainPage.search(LocatorsHolder.PEANUT_BUTTER_SEARCH_REQUEST).addGoods(LocatorsHolder.CHOOSE_GOODS_FROM_THE_LIST);
+        mainPage.search(LocatorsHolder.PEANUT_BUTTER_SEARCH_REQUEST).addGoods(Page.chooseGoodsFromListAfterSearch(6));
         currentQuantityOfGoods = searchPage.goToCart().countGoods().getCurQuantOfGoods();
         Assert.assertEquals(currentQuantityOfGoods, quantityOfGoodsBefore + 1,
                 "Quantity of goods after adding new one is incorrect");

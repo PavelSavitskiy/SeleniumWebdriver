@@ -29,7 +29,6 @@ public class LocatorsHolder {
     /////////////CART VARIABLES//////////////
     public static final By CART_BUTTON = By.xpath("//span[contains(text(),'Корзина')]");
     public static final String PEANUT_BUTTER_SEARCH_REQUEST = "Арахисовая паста";
-    public static final By CHOOSE_GOODS_FROM_THE_LIST = By.xpath("(//div[@class ='good-list-item ']/div/a)[3]");
     public static final By ADD_TO_CART_BUTTON = By.xpath("//input[@value='Добавить в корзину']");
     public static final By CLOSE_CART_DIALOG_WINDOW = By.xpath("//a[contains(text(),'Закрыть')]");
     public static final By DELETE_GOODS_BUTTON = By.xpath("//a[contains (text(), 'Удалить')]");
