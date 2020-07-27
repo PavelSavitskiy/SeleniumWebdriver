@@ -7,15 +7,14 @@ import org.testng.annotations.Test;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.AfterClass;
 
-import static com.epam.cdp.kzta2020.pages.LocatorsHolder.LOGIN;
-
 public class AddGoodsToCartTest extends BasicTest {
     private int quantityOfGoodsBefore;
     private int currentQuantityOfGoods;
 
     @BeforeClass(description = "Log in")
     public void setUp() {
-        loginPage = mainPage.goToLoginPage().logInFillInForms(LOGIN, LocatorsHolder.PASSWORD);
+        loginPage = mainPage.goToLoginPage().logInFillInForms
+                (Page.getProperties("login"), Page.getProperties("password"));
     }
 
     @AfterClass(description = "Delete added goods")

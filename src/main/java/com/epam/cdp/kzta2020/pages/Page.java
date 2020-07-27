@@ -6,6 +6,10 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
 public abstract class Page {
     protected WebDriver driver;
 
@@ -62,5 +66,26 @@ public abstract class Page {
 
     public void sendKeysTeElement(By locator, String string) {
         getDriver().findElement(locator).sendKeys(string);
+    }
+
+    public static String getProperties(String propertyKey){
+        FileInputStream fis;
+        Properties property = new Properties();
+        String propertyValue = null;
+        try {
+            fis = new FileInputStream("src/main/resources/config.properties");
+            property.load(fis);
+            propertyValue = property.getProperty(propertyKey);
+
+        } catch (IOException e) {
+            System.err.println("ОШИБКА: Файл свойств отсуствует!");
+        }
+        return propertyValue;
+    }
+
+    public static void main(String[] args) {
+
+
+
     }
 }

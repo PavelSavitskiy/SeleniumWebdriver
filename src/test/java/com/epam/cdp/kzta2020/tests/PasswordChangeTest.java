@@ -1,31 +1,33 @@
 package com.epam.cdp.kzta2020.tests;
 
 import com.epam.cdp.kzta2020.pages.LocatorsHolder;
+import com.epam.cdp.kzta2020.pages.Page;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class PasswordChangeTest extends BasicTest {
-    private final String NEW_PASSWORD = "selenium";
+    private String login = Page.getProperties("login");
+    private String password = Page.getProperties("password");
+    private String newPassword = Page.getProperties("newPassword");
 
     @BeforeClass(description = "Login")
     public void setUp() {
-        loginPage = mainPage.goToLoginPage().logInFillInForms(LocatorsHolder.LOGIN, LocatorsHolder.PASSWORD);
+        loginPage = mainPage.goToLoginPage().logInFillInForms(login, password);
     }
 
     @AfterClass(description = "Change password to old one")
     public void tearDown() {
-        mainPage.goToUserSectionPage().chooseChangePasswordSubSection().changePassword(NEW_PASSWORD, LocatorsHolder.PASSWORD);
+        mainPage.goToUserSectionPage().chooseChangePasswordSubSection().changePassword(newPassword, password);
     }
 
     @Test(description = "Change password, then log out, then log in with new one")
     public void passwordChangeTest() {
         passwordChangePage = mainPage.goToUserSectionPage().chooseChangePasswordSubSection();
-        passwordChangePage.changePassword(LocatorsHolder.PASSWORD, NEW_PASSWORD);
-        passwordChangePage.logOut().goToLoginPage().logInFillInForms(LocatorsHolder.LOGIN, NEW_PASSWORD);
-        Assert.assertTrue(mainPage.
-                        isElementPresent(LocatorsHolder.USER_NAME_SHOWER),
+        passwordChangePage.changePassword(password, newPassword);
+        passwordChangePage.logOut().goToLoginPage().logInFillInForms(login, newPassword);
+        Assert.assertTrue(mainPage.isElementPresent(LocatorsHolder.USER_NAME_SHOWER),
                 "Password wasn't changed properly");
     }
 }
