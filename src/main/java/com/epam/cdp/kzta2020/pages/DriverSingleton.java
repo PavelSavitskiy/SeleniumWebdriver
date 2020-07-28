@@ -14,6 +14,7 @@ public class DriverSingleton {
     private static WebDriver webDriverSingleton;
     private static final String CHROME="chrome";
 
+
     private DriverSingleton() {
     }
 
@@ -25,11 +26,11 @@ public class DriverSingleton {
     public static WebDriver init() {
         String driverType=Page.getProperties("driver");
         if(driverType.equals("firefox")) {
-            System.setProperty("geckoDriver", System.getProperty("user.dir") + "\\src\\main\\resources\\geckodriver.exe");
+            System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "\\src\\main\\resources\\geckodriver.exe");
             webDriverSingleton = new FirefoxDriver();
         }
         if(driverType.equals(CHROME)) {
-            System.setProperty("chromeDriver", System.getProperty("user.dir") + "\\src\\main\\resources\\chromedriver.exe");
+            System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\src\\main\\resources\\chromedriver.exe");
             webDriverSingleton = new ChromeDriver();
         }
         if(driverType.equals("remote")){

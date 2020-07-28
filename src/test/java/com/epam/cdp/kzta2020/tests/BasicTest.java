@@ -21,7 +21,7 @@ public abstract class BasicTest {
 
 
     @BeforeClass(description = "Initialize browser, initialize pages drivers")
-    public void setUps()  {
+    public void openBrowser()  {
         DriverSingleton.init();
         DriverSingleton.getWebDriverSingleton().get(Page.getProperties("homepageFlipKz"));
         mainPage = new MainPage();
@@ -34,6 +34,6 @@ public abstract class BasicTest {
 
     @AfterClass(description = "Close browser",alwaysRun = true)
     public void quiteBrowser() {
-       // DriverSingleton.quiteBrowser();
+        //DriverSingleton.quiteBrowser();
     }
 }

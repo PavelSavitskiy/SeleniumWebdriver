@@ -11,8 +11,9 @@ public class AddGoodsToCartTest extends BasicTest {
     private int quantityOfGoodsBefore;
     private int currentQuantityOfGoods;
     private static final int GOODS_ORDINAL_NUMBER = Integer.parseInt( Page.getProperties("goodsOrdinalNumber"));
+    public static final String PEANUT_BUTTER_SEARCH_REQUEST = "Арахисовая паста";
     @BeforeClass(description = "Log in")
-    public void setUp() {
+    public void login() {
         loginPage = mainPage.goToLoginPage().logInFillInForms
                 (Page.getProperties("login"), Page.getProperties("password"));
     }
@@ -20,14 +21,14 @@ public class AddGoodsToCartTest extends BasicTest {
     @Test(description = "Check that goods were added")
     public void addingGoodsTest() {
         quantityOfGoodsBefore = mainPage.goToCart().countGoods().getCurQuantOfGoods();
-        mainPage.search(LocatorsHolder.PEANUT_BUTTER_SEARCH_REQUEST).addGoods(Page.chooseGoodsFromListAfterSearch(GOODS_ORDINAL_NUMBER));
+        mainPage.search(PEANUT_BUTTER_SEARCH_REQUEST).addGoods(Page.chooseGoodsFromListAfterSearch(GOODS_ORDINAL_NUMBER));
         currentQuantityOfGoods = searchPage.goToCart().countGoods().getCurQuantOfGoods();
         Assert.assertEquals(currentQuantityOfGoods, quantityOfGoodsBefore + 1,
                 "Quantity of goods after adding new one is incorrect");
     }
 
     @AfterClass(description = "Delete added goods",alwaysRun = true)
-    public void tearDown() {
+    public void cleanCartAfterTest() {
         searchPage.clickElements(LocatorsHolder.DELETE_GOODS_BUTTON);
     }
 }

@@ -13,7 +13,7 @@ public class PasswordChangeTest extends BasicTest {
     private String newPassword = Page.getProperties("newPassword");
 
     @BeforeClass(description = "Login")
-    public void setUp() {
+    public void loginBeforeTest() {
         loginPage = mainPage.goToLoginPage().logInFillInForms(login, password);
     }
 
@@ -26,11 +26,8 @@ public class PasswordChangeTest extends BasicTest {
                 "Password wasn't changed properly");
     }
 
-    @AfterClass(description = "Change password to old one",alwaysRun = true)
-    public void tearDown() {
-        passwordChangePage.logOut().goToLoginPage().logInFillInForms(login, newPassword);
-        passwordChangePage = mainPage.goToUserSectionPage().chooseChangePasswordSubSection();
-        passwordChangePage.changePassword(newPassword, password);
-//         mainPage.goToUserSectionPage().chooseChangePasswordSubSection(). changePassword(newPassword, password);
+    @AfterClass(description = "Change password to old one", alwaysRun = true)
+    public void changePasswordToOld() {
+        mainPage.goToUserSectionPage().chooseChangePasswordSubSection().changePassword(newPassword, password);
     }
 }

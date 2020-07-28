@@ -17,11 +17,7 @@ public abstract   class Page {
     private static String propertyPath ="src/main/resources/config.properties";
 
     public Page()   {
-        try {
             this.driver = DriverSingleton.getWebDriverSingleton();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public WebDriver getDriver() {
@@ -51,6 +47,7 @@ public abstract   class Page {
 
     public void navigateMousePointerToElement(By elementLocator) {
         Actions mouseHover = new Actions(getDriver());
+        waitForElementPresent(elementLocator);
         mouseHover.moveToElement(getDriver().findElement(elementLocator)).perform();
     }
 
@@ -59,7 +56,6 @@ public abstract   class Page {
         new WebDriverWait(getDriver(), 10).until(ExpectedConditions.
                 stalenessOf(getDriver().findElement(locator)));
     }
-
 
     public static By  chooseGoodsFromListAfterSearch (int num){   //where "number" is ordinal number of goods on the search page
         return  By.xpath( String.format(FORMATTED_STRING_FOR_GOODS_ORDINAL_NUMBER,num));
@@ -71,7 +67,6 @@ public abstract   class Page {
 
     public  void  waitForElementPresent(By locator){
         new WebDriverWait(getDriver(),10).until(ExpectedConditions.presenceOfElementLocated(locator));
-
     }
 
     public void waitForElementVisible( By locator){
@@ -79,6 +74,7 @@ public abstract   class Page {
     }
 
     public void clickElements(By locator) {
+        waitForElementPresent(locator);
         getDriver().findElement(locator).click();
     }
 

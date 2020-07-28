@@ -23,7 +23,7 @@ public class SearchPage extends Page {
     }
 
     public List<WebElement> getResults() {
-        return getDriver().findElements(By.cssSelector(LocatorsHolder.SEARCH_RESULTS));
+        return getDriver().findElements(LocatorsHolder.SEARCH_RESULTS);
     }
 
     public boolean compareAreGoodsSortedByPriceReduction(By firstGoods, By secondGoods) {
