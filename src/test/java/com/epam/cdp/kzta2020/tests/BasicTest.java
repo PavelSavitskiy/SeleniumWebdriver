@@ -34,6 +34,6 @@ public abstract class BasicTest {
 
     @AfterClass(description = "Close browser",alwaysRun = true)
     public void quiteBrowser() {
-        //DriverSingleton.quiteBrowser();
+        DriverSingleton.quiteBrowser();
     }
 }

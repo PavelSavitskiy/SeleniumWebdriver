@@ -21,8 +21,6 @@ public class LocatorsHolder {
     public static final By FILTER_SOON_ON_SALE_CHECKBOX = By.xpath("//div[contains(text(),'Новинка')]");
     public static final By IN_STOCK_LABEL = By.xpath("//span[contains(text(),'На складе')]");
     public static final By BRADBURY_LABEL = By.xpath(" //div[@class='add-info']/span[contains(text(),'Р. Брэдбери')]");
-    public static final By FIRST_GOODS_FOR_SORTING_COMPARING = By.xpath("(//div[@class='price'])[1]");
-    public static final By SECOND_GOODS_FOR_SORTING_COMPARING = By.xpath("(//div[@class='price'])[2]");
     /////////////CART VARIABLES//////////////
     public static final By CART_BUTTON = By.xpath("//span[contains(text(),'Корзина')]");
     public static final By ADD_TO_CART_BUTTON = By.xpath("//input[@value='Добавить в корзину']");

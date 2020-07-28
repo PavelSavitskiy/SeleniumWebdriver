@@ -13,7 +13,6 @@ public abstract   class Page {
     protected WebDriver driver;
     private String login = Page.getProperties("login");
     private String newPassword = Page.getProperties("newPassword");
-    private static String FORMATTED_STRING_FOR_GOODS_ORDINAL_NUMBER="(//div[@class ='good-list-item ']/div/a)[%d]";
     private static String propertyPath ="src/main/resources/config.properties";
 
     public Page()   {
@@ -55,10 +54,6 @@ public abstract   class Page {
         getDriver().findElement(locator);
         new WebDriverWait(getDriver(), 10).until(ExpectedConditions.
                 stalenessOf(getDriver().findElement(locator)));
-    }
-
-    public static By  chooseGoodsFromListAfterSearch (int num){   //where "number" is ordinal number of goods on the search page
-        return  By.xpath( String.format(FORMATTED_STRING_FOR_GOODS_ORDINAL_NUMBER,num));
     }
 
     public boolean isElementPresent(By locator) {

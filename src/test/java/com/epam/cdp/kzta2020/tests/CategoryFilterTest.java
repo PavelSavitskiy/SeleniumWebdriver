@@ -1,9 +1,10 @@
 package com.epam.cdp.kzta2020.tests;
 
 import com.epam.cdp.kzta2020.pages.LocatorsHolder;
-import org.openqa.selenium.By;
+import com.epam.cdp.kzta2020.pages.SearchPage;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class CategoryFilterTest extends BasicTest {
@@ -40,12 +41,13 @@ public class CategoryFilterTest extends BasicTest {
                 "Not all goods sorted by chosen author");
     }
 
+    @Parameters({"goods-nearer-to-head-of-list","goods-nearer-to-end-of-list" })
     @Test(description = "Check price down sorting")
-    public void comparePricesAfterSorting() {
+    public void comparePricesAfterSorting(int num1,int num2) {
         searchPage.navigateMousePointerToElement(LocatorsHolder.SORT_DROP_DOWN_MENU);
         searchPage.clickElements(LocatorsHolder.SORT_DOWN_PRICE_SUB_MENU);
         Assert.assertTrue(searchPage.compareAreGoodsSortedByPriceReduction
-                        (LocatorsHolder.FIRST_GOODS_FOR_SORTING_COMPARING, LocatorsHolder.SECOND_GOODS_FOR_SORTING_COMPARING),
+                                ((SearchPage.choosePriceFromListAfterSearch(num1)),(SearchPage.choosePriceFromListAfterSearch(num2))),
                 "Goods weren't sorted price down way.");
     }
 }

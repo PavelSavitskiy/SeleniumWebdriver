@@ -7,6 +7,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 
 public class SearchPage extends Page {
+    private static String FORMATTED_STRING_FOR_GOODS_ORDINAL_NUMBER="(//div[@class ='good-list-item ']/div/a)[%d]";
+    private static  String FORMATTED_STRING_FOR_SORTING_COMPARING = "(//div[@class='price'])[%d]";
 
     public SearchPage addGoods(By linkToGoodsFromList) {
         clickElements(linkToGoodsFromList);
@@ -32,5 +34,12 @@ public class SearchPage extends Page {
         double secondPrice = Double.parseDouble((this.getDriver().findElement(secondGoods).getText()).
                 replaceAll("(\\s|\\.|[а-я])", ""));
         return (firstPrice > secondPrice);
+    }
+    public static By  chooseGoodsFromListAfterSearch (int num){   //where "number" is ordinal number of goods on the search page
+        return  By.xpath( String.format(FORMATTED_STRING_FOR_GOODS_ORDINAL_NUMBER,num));
+    }
+
+    public static By  choosePriceFromListAfterSearch (int num){   //where "number" is ordinal number of goods on the search page
+        return  By.xpath( String.format(FORMATTED_STRING_FOR_SORTING_COMPARING,num));
     }
 }
