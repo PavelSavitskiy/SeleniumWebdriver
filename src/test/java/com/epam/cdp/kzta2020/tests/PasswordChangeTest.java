@@ -17,11 +17,6 @@ public class PasswordChangeTest extends BasicTest {
         loginPage = mainPage.goToLoginPage().logInFillInForms(login, password);
     }
 
-    @AfterClass(description = "Change password to old one")
-    public void tearDown() {
-        mainPage.goToUserSectionPage().chooseChangePasswordSubSection().changePassword(newPassword, password);
-    }
-
     @Test(description = "Change password, then log out, then log in with new one")
     public void passwordChangeTest() {
         passwordChangePage = mainPage.goToUserSectionPage().chooseChangePasswordSubSection();
@@ -29,5 +24,13 @@ public class PasswordChangeTest extends BasicTest {
         passwordChangePage.logOut().goToLoginPage().logInFillInForms(login, newPassword);
         Assert.assertTrue(mainPage.isElementPresent(LocatorsHolder.USER_NAME_SHOWER),
                 "Password wasn't changed properly");
+    }
+
+    @AfterClass(description = "Change password to old one",alwaysRun = true)
+    public void tearDown() {
+        passwordChangePage.logOut().goToLoginPage().logInFillInForms(login, newPassword);
+        passwordChangePage = mainPage.goToUserSectionPage().chooseChangePasswordSubSection();
+        passwordChangePage.changePassword(newPassword, password);
+//         mainPage.goToUserSectionPage().chooseChangePasswordSubSection(). changePassword(newPassword, password);
     }
 }
