@@ -5,7 +5,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
@@ -13,7 +12,9 @@ import java.util.concurrent.TimeUnit;
 public class DriverSingleton {
     private static WebDriver webDriverSingleton;
     private static final String CHROME="chrome";
-
+    private static final String FIREFOX="firefox";
+    private static final String FIREFOX_REMOTE="firefoxremote";
+    private static final String CHROME_REMOTE="chromeremote";
 
     private DriverSingleton() {
     }
@@ -25,7 +26,7 @@ public class DriverSingleton {
 
     public static WebDriver init() {
         String driverType=Page.getProperties("driver");
-        if(driverType.equals("firefox")) {
+        if(driverType.equals(FIREFOX)) {
             System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "\\src\\main\\resources\\geckodriver.exe");
             webDriverSingleton = new FirefoxDriver();
         }
@@ -33,13 +34,22 @@ public class DriverSingleton {
             System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\src\\main\\resources\\chromedriver.exe");
             webDriverSingleton = new ChromeDriver();
         }
-        if(driverType.equals("remote")){
+        if(driverType.equals(FIREFOX_REMOTE)){
             try {
-                webDriverSingleton = new RemoteWebDriver(new URL("http://127.0.0.1:4444/wd/hub"), DesiredCapabilities.chrome());
+                webDriverSingleton = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), DesiredCapabilities.firefox());
             } catch (MalformedURLException e) {
                 e.printStackTrace();
+            }
         }
+
+        if(driverType.equals(CHROME_REMOTE)){
+            try {
+                webDriverSingleton = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), DesiredCapabilities.chrome());
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
         }
+
         webDriverSingleton.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         return webDriverSingleton;
     }

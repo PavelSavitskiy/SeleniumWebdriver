@@ -13,7 +13,6 @@ public class CategoryFilterTest extends BasicTest {
     private int authorFilter;
     private int inStockFilter;
 
-
     @BeforeClass(description = "Search element by catalog, use two filters and apply sorting by price down")
     public void chooseGoodsThroughDifferentFilters() {
         mainPage.navigateMousePointerToElement(LocatorsHolder.BOOKS_CATEGORY);

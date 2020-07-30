@@ -8,7 +8,6 @@ import java.util.concurrent.TimeUnit;
 public class CartPage extends Page {
     private int currentQuantityOfGoods;
 
-
     public int getCurQuantOfGoods() {
         return currentQuantityOfGoods;
     }

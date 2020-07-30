@@ -1,6 +1,8 @@
 package com.epam.cdp.kzta2020.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -45,15 +47,10 @@ public abstract   class Page {
     }
 
     public void navigateMousePointerToElement(By elementLocator) {
+        highLightElement(elementLocator);
         Actions mouseHover = new Actions(getDriver());
         waitForElementPresent(elementLocator);
         mouseHover.moveToElement(getDriver().findElement(elementLocator)).perform();
-    }
-
-    public void waitStalenessOfOrDisappear(By locator) {
-        getDriver().findElement(locator);
-        new WebDriverWait(getDriver(), 10).until(ExpectedConditions.
-                stalenessOf(getDriver().findElement(locator)));
     }
 
     public boolean isElementPresent(By locator) {
@@ -61,7 +58,7 @@ public abstract   class Page {
     }
 
     public  void  waitForElementPresent(By locator){
-        new WebDriverWait(getDriver(),10).until(ExpectedConditions.presenceOfElementLocated(locator));
+        new WebDriverWait(getDriver(),10).until(d->d.findElement(locator));
     }
 
     public void waitForElementVisible( By locator){
@@ -69,11 +66,22 @@ public abstract   class Page {
     }
 
     public void clickElements(By locator) {
-        waitForElementPresent(locator);
-        getDriver().findElement(locator).click();
+        highLightElement(locator);
+        while (true) {
+            try {
+                new WebDriverWait(getDriver(), 15).until
+                        (d -> d.findElement(locator)).click();
+                break;
+            } catch (Exception exception) {
+                if (exception instanceof TimeoutException){
+                    break;
+                }
+            }
+        }
     }
 
     public void sendKeysTeElement(By locator, String string) {
+        highLightElement(locator);
         waitForElementPresent(locator);
         waitForElementVisible(locator);
         getDriver().findElement(locator).sendKeys(string);
@@ -92,5 +100,14 @@ public abstract   class Page {
             System.err.println("ОШИБКА: Файл свойств отсуствует!");
         }
         return propertyValue;
+    }
+
+    public void highLightElement(By locator){
+        try {
+       waitForElementPresent(locator);
+        ((JavascriptExecutor)getDriver()).executeScript(
+                "arguments[0].style.border ='6px solid red'",getDriver().findElement(locator));
+        }
+        catch (Exception e){}
     }
 }

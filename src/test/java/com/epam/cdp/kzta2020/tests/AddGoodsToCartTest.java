@@ -3,6 +3,7 @@ package com.epam.cdp.kzta2020.tests;
 import com.epam.cdp.kzta2020.pages.LocatorsHolder;
 import com.epam.cdp.kzta2020.pages.Page;
 import com.epam.cdp.kzta2020.pages.SearchPage;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
@@ -19,6 +20,7 @@ public class AddGoodsToCartTest extends BasicTest {
         loginPage = mainPage.goToLoginPage().logInFillInForms
                 (Page.getProperties("login"), Page.getProperties("password"));
     }
+
     @Parameters({"goods-ordinal-number"})
     @Test(description = "Check that goods were added")
     public void addingGoodsTest(@Optional("optional value")int number) {
@@ -32,5 +34,6 @@ public class AddGoodsToCartTest extends BasicTest {
     @AfterClass(description = "Delete added goods",alwaysRun = true)
     public void cleanCartAfterTest() {
         searchPage.clickElements(LocatorsHolder.DELETE_GOODS_BUTTON);
+        ((JavascriptExecutor)searchPage.getDriver()).executeScript("document.getElementsByClassName('p300')[0].click()");
     }
 }
