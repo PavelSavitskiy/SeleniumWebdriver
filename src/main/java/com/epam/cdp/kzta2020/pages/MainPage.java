@@ -11,7 +11,7 @@ public class MainPage extends Page {
 
     public SearchPage search(String request) {
         sendKeysTeElement(LocatorsHolder.SEARCH_INPUT, request);
-        clickElements(LocatorsHolder.SEARCH_BUTTON);
+        clickElementsJavaScript(LocatorsHolder.SEARCH_BUTTON);
         clearSearchInput();
         return new SearchPage();
     }

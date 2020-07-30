@@ -11,14 +11,14 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public abstract   class Page {
+public abstract class Page {
     protected WebDriver driver;
     private String login = Page.getProperties("login");
     private String newPassword = Page.getProperties("newPassword");
-    private static String propertyPath ="src/main/resources/config.properties";
+    private static String propertyPath = "src/main/resources/config.properties";
 
-    public Page()   {
-            this.driver = DriverSingleton.getWebDriverSingleton();
+    public Page() {
+        this.driver = DriverSingleton.getWebDriverSingleton();
     }
 
     public WebDriver getDriver() {
@@ -36,7 +36,7 @@ public abstract   class Page {
     }
 
     public LoginPage goToLoginPage() {
-        clickElements(LocatorsHolder.LOGIN_BUTTON);
+        clickElementsJavaScript(LocatorsHolder.LOGIN_BUTTON);
         return new LoginPage();
     }
 
@@ -57,12 +57,12 @@ public abstract   class Page {
         return (getDriver().findElements(locator).size() > 0);
     }
 
-    public  void  waitForElementPresent(By locator){
-        new WebDriverWait(getDriver(),10).until(d->d.findElement(locator));
+    public void waitForElementPresent(By locator) {
+        new WebDriverWait(getDriver(), 10).until(d -> d.findElement(locator));
     }
 
-    public void waitForElementVisible( By locator){
-        new WebDriverWait(getDriver(),5).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
+    public void waitForElementVisible(By locator) {
+        new WebDriverWait(getDriver(), 5).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
     }
 
     public void clickElements(By locator) {
@@ -73,7 +73,7 @@ public abstract   class Page {
                         (d -> d.findElement(locator)).click();
                 break;
             } catch (Exception exception) {
-                if (exception instanceof TimeoutException){
+                if (exception instanceof TimeoutException) {
                     break;
                 }
             }
@@ -87,7 +87,7 @@ public abstract   class Page {
         getDriver().findElement(locator).sendKeys(string);
     }
 
-    public static String getProperties(String propertyKey){
+    public static String getProperties(String propertyKey) {
         FileInputStream fis;
         Properties property = new Properties();
         String propertyValue = null;
@@ -102,12 +102,18 @@ public abstract   class Page {
         return propertyValue;
     }
 
-    public void highLightElement(By locator){
+    public void highLightElement(By locator) {
         try {
-       waitForElementPresent(locator);
-        ((JavascriptExecutor)getDriver()).executeScript(
-                "arguments[0].style.border ='6px solid red'",getDriver().findElement(locator));
+            waitForElementPresent(locator);
+            ((JavascriptExecutor) getDriver()).executeScript(
+                    "arguments[0].style.border ='6px solid red'", getDriver().findElement(locator));
+        } catch (Exception e) {
         }
-        catch (Exception e){}
+    }
+
+    public void clickElementsJavaScript(By locator) {
+        waitForElementPresent(locator);
+        ((JavascriptExecutor) getDriver()).executeScript(
+                "arguments[0].click()", getDriver().findElement(locator));
     }
 }

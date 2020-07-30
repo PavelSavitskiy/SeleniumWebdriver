@@ -7,9 +7,9 @@ public class LocatorsHolder {
     ////////////LOGIN VARIABLES//////////////
     public static final By LOGIN_BUTTON = By.xpath("//span[contains (text(),'Войти')]");
     public static final By LOGOUT_BUTTON = By.xpath("//a[contains(text(),'Выйти')]");
-    public static final By LOGIN_FIELD = By.xpath("//input[@type ='email']");
-    public static final By PASSWORD_FIELD = By.xpath("//input[@type ='password']");
-    public static final By LOGIN_SUBMIT_BUTTON = By.cssSelector("input#enter_button");
+    public static final By LOGIN_FIELD = By.id("email");
+    public static final By PASSWORD_FIELD = By.id("pass");
+    public static final By LOGIN_SUBMIT_BUTTON = By.id("enter_button");
     public static final By USER_NAME_SHOWER = By.xpath("//span[contains (text(), 'Павел')]");
     /////////////SEARCH VARIABLES////////////
     public static final By SEARCH_INPUT = By.id("search_input");
@@ -23,7 +23,7 @@ public class LocatorsHolder {
     public static final By BRADBURY_LABEL = By.xpath(" //div[@class='add-info']/span[contains(text(),'Р. Брэдбери')]");
     /////////////CART VARIABLES//////////////
     public static final By CART_BUTTON = By.xpath("//span[contains(text(),'Корзина')]");
-    public static final By ADD_TO_CART_BUTTON = By.xpath("//input[@value='Добавить в корзину']");
+    public static final By ADD_TO_CART_BUTTON = By.id("cart_button");
     public static final By CLOSE_CART_DIALOG_WINDOW = By.xpath("//a[contains(text(),'Закрыть')]");
     public static final By DELETE_GOODS_BUTTON = By.xpath("//a[contains (text(), 'Удалить')]");
     ////////////MY SECTION//////////////////////////

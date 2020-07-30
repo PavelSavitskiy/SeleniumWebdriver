@@ -5,7 +5,7 @@ public class LoginPage extends Page {
     public LoginPage logInFillInForms(String login, String password) {
         sendKeysTeElement(LocatorsHolder.LOGIN_FIELD, login);
         sendKeysTeElement(LocatorsHolder.PASSWORD_FIELD, password);
-        clickElements(LocatorsHolder.LOGIN_SUBMIT_BUTTON);
+        clickElementsJavaScript(LocatorsHolder.LOGIN_SUBMIT_BUTTON);
         return this;
     }
 }
