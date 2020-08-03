@@ -9,12 +9,16 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+import static com.epam.cdp.kzta2020.pages.Page.STANDARD_WAIT_FOR_ELEMENT_TIMEOUT;
+
 public class DriverSingleton {
     private static WebDriver webDriverSingleton;
     private static final String CHROME="chrome";
     private static final String FIREFOX="firefox";
     private static final String FIREFOX_REMOTE="firefoxremote";
     private static final String CHROME_REMOTE="chromeremote";
+    private static final String LOCALHOST=Page.getProperties("localhost");
+
 
     private DriverSingleton() {
     }
@@ -27,16 +31,17 @@ public class DriverSingleton {
     public static WebDriver init() {
         String driverType=Page.getProperties("driver");
         if(driverType.equals(FIREFOX)) {
-            System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "\\src\\main\\resources\\geckodriver.exe");
+            System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "\\src\\main\\resources\\driverbinaries\\geckodriver.exe");
             webDriverSingleton = new FirefoxDriver();
         }
         if(driverType.equals(CHROME)) {
-            System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\src\\main\\resources\\chromedriver.exe");
+            System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\src\\main\\resources\\driverbinaries\\chromedriver.exe");
             webDriverSingleton = new ChromeDriver();
         }
         if(driverType.equals(FIREFOX_REMOTE)){
+
             try {
-                webDriverSingleton = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), DesiredCapabilities.firefox());
+                webDriverSingleton = new RemoteWebDriver(new URL(LOCALHOST), DesiredCapabilities.firefox());
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
@@ -44,13 +49,13 @@ public class DriverSingleton {
 
         if(driverType.equals(CHROME_REMOTE)){
             try {
-                webDriverSingleton = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), DesiredCapabilities.chrome());
+                webDriverSingleton = new RemoteWebDriver(new URL(LOCALHOST), DesiredCapabilities.chrome());
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
         }
 
-        webDriverSingleton.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+        webDriverSingleton.manage().timeouts().implicitlyWait(STANDARD_WAIT_FOR_ELEMENT_TIMEOUT, TimeUnit.SECONDS);
         return webDriverSingleton;
     }
 

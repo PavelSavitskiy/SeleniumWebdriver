@@ -4,6 +4,7 @@ import com.epam.cdp.kzta2020.pages.LocatorsHolder;
 import com.epam.cdp.kzta2020.pages.SearchPage;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -34,19 +35,19 @@ public class CategoryFilterTest extends BasicTest {
                 "Not all goods sorted by in-stock filter");
     }
 
-    @Test(description = "Check that author filter works properly")
+    @Test(description = "Check that author filter works properly", dependsOnMethods = "comparePricesAfterSorting", alwaysRun = true)
     public void authorFilterTest() {
         Assert.assertEquals(quantityOfGoodsOnPage, authorFilter,
                 "Not all goods sorted by chosen author");
     }
 
-    @Parameters({"goods-nearer-to-head-of-list","goods-nearer-to-end-of-list" })
-    @Test(description = "Check price down sorting")
-    public void comparePricesAfterSorting(int num1,int num2) {
+    @Parameters({"goods-nearer-to-head-of-list", "goods-nearer-to-end-of-list"})
+    @Test(description = "Check price down sorting", dependsOnMethods = "inStockFilterTest", alwaysRun = true)
+    public void comparePricesAfterSorting(@Optional("1") int num1, @Optional("2") int num2) {
         searchPage.navigateMousePointerToElement(LocatorsHolder.SORT_DROP_DOWN_MENU);
         searchPage.clickElements(LocatorsHolder.SORT_DOWN_PRICE_SUB_MENU);
         Assert.assertTrue(searchPage.compareAreGoodsSortedByPriceReduction
-                                ((SearchPage.choosePriceFromListAfterSearch(num1)),(SearchPage.choosePriceFromListAfterSearch(num2))),
+                        ((SearchPage.choosePriceFromListAfterSearch(num1)), (SearchPage.choosePriceFromListAfterSearch(num2))),
                 "Goods weren't sorted price down way.");
     }
 }
