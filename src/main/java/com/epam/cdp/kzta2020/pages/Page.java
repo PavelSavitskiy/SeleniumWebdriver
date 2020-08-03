@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.Timeouts;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -14,7 +15,6 @@ import java.util.Properties;
 
 public abstract class Page {
     protected WebDriver driver;
-    static final int STANDARD_WAIT_FOR_ELEMENT_TIMEOUT = 10;
     private static String propertyPath = "src/main/resources/configs/config.properties";
 
     public Page() {
@@ -58,26 +58,26 @@ public abstract class Page {
     }
 
     public void waitForElementPresent(By locator) {
-        new WebDriverWait(getDriver(), STANDARD_WAIT_FOR_ELEMENT_TIMEOUT).until(d -> d.findElement(locator));
+        new WebDriverWait(getDriver(), Timeouts.ORDINARY_WAITING.getSeconds()).until(d -> d.findElement(locator));
     }
 
     public void waitAllElementsPresent(By locator) {
-        new WebDriverWait(getDriver(), STANDARD_WAIT_FOR_ELEMENT_TIMEOUT).until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
+        new WebDriverWait(getDriver(), Timeouts.ORDINARY_WAITING.getSeconds()).until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
     }
 
     public void waitPreciseQuantityOfElementsOnPage(By locator, int quantity) {
-        new WebDriverWait(getDriver(), STANDARD_WAIT_FOR_ELEMENT_TIMEOUT).until(ExpectedConditions.numberOfElementsToBeMoreThan(locator, quantity));
+        new WebDriverWait(getDriver(), Timeouts.ORDINARY_WAITING.getSeconds()).until(ExpectedConditions.numberOfElementsToBeMoreThan(locator, quantity));
     }
 
     public void waitForElementVisible(By locator) {
-        new WebDriverWait(getDriver(), STANDARD_WAIT_FOR_ELEMENT_TIMEOUT).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
+        new WebDriverWait(getDriver(), Timeouts.ORDINARY_WAITING.getSeconds()).until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
     }
 
     public void clickElements(By locator) {
         highLightElement(locator);
         while (true) {
             try {
-                new WebDriverWait(getDriver(), STANDARD_WAIT_FOR_ELEMENT_TIMEOUT).until
+                new WebDriverWait(getDriver(), Timeouts.ORDINARY_WAITING.getSeconds()).until
                         (d -> d.findElement(locator)).click();
                 break;
             } catch (Exception exception) {

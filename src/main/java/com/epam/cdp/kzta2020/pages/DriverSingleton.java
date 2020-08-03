@@ -5,11 +5,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import utils.Timeouts;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
-
-import static com.epam.cdp.kzta2020.pages.Page.STANDARD_WAIT_FOR_ELEMENT_TIMEOUT;
 
 public class DriverSingleton {
     private static WebDriver webDriverSingleton;
@@ -18,7 +18,6 @@ public class DriverSingleton {
     private static final String FIREFOX_REMOTE="firefoxremote";
     private static final String CHROME_REMOTE="chromeremote";
     private static final String LOCALHOST=Page.getProperties("localhost");
-
 
     private DriverSingleton() {
     }
@@ -54,10 +53,10 @@ public class DriverSingleton {
                 e.printStackTrace();
             }
         }
-
-        webDriverSingleton.manage().timeouts().implicitlyWait(STANDARD_WAIT_FOR_ELEMENT_TIMEOUT, TimeUnit.SECONDS);
+        webDriverSingleton.manage().timeouts().implicitlyWait(Timeouts.ORDINARY_WAITING.getSeconds(),TimeUnit.SECONDS);
         return webDriverSingleton;
     }
+
 
     public static void quiteBrowser() {
         webDriverSingleton.quit();
