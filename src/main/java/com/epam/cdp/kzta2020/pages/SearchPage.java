@@ -6,14 +6,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.RandomOrdinalNumberOfGoodsOnPage;
 
 import java.util.List;
-
-import static utils.RandomOrdinalNumberOfGoodsOnPage.getRandomNumber;
 
 public class SearchPage extends Page {
     private static String FORMATTED_STRING_FOR_GOODS_ORDINAL_NUMBER = "(//div[@class ='good-list-item ']/div/div/div[@class='price']/../../..)[%d]";
     private static String FORMATTED_STRING_FOR_SORTING_COMPARING = "(//div[@class='price'])[%d]";
+    private static String LIST_AFTER_AUTHOR_FILTER_CHOSEN = "(//a[contains(text(),'%s')])[1]";
+    private static String  AUTHOR_LABEL =" //div[@class='add-info']/span[contains(text(),'%s')]";
 
     public SearchPage addGoods(By linkToGoodsFromList) {
         clickElements(linkToGoodsFromList);
@@ -53,12 +54,20 @@ public class SearchPage extends Page {
         return (firstPrice > secondPrice);
     }
 
-    public static By chooseGoodsFromListAfterSearch() {   //where "number" is ordinal number of goods on the search page
-        return By.xpath(String.format(FORMATTED_STRING_FOR_GOODS_ORDINAL_NUMBER, getRandomNumber().getNumber()));
+    public static By chooseGoodsFromListAfterSearch(List list) {   //where "number" is ordinal number of goods on the search page
+        return By.xpath(String.format(FORMATTED_STRING_FOR_GOODS_ORDINAL_NUMBER, new RandomOrdinalNumberOfGoodsOnPage(list).getNumber()));
     }
 
     public static By choosePriceFromListAfterSearch(int num) {   //where "number" is ordinal number of goods on the search page
         return By.xpath(String.format(FORMATTED_STRING_FOR_SORTING_COMPARING, num));
+    }
+
+    public static By chooseAuthorAfterFillingInFilterInputForm(String name){
+        return By.xpath(String.format(LIST_AFTER_AUTHOR_FILTER_CHOSEN,name));
+    }
+
+    public static By getElementsLocatorWithAuthorLabel(String name){
+        return By.xpath(String.format(AUTHOR_LABEL,name));
     }
 
     public SearchPage dragAndDropElements(By locator, int x, int y) {

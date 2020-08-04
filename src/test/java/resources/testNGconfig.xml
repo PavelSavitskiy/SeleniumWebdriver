@@ -4,13 +4,16 @@
     <test name="Test1" >
         <classes>
             <class name="com.epam.cdp.kzta2020.tests.LogInTest" />
-            <class name="com.epam.cdp.kzta2020.tests.SearchPageTest" />
+            <class name="com.epam.cdp.kzta2020.tests.SearchPageTest" >
+                <parameter name="request" value="Пазлы"/>
+            </class>
             <class name="com.epam.cdp.kzta2020.tests.AddGoodsToCartTest">
-                <parameter name="goods-ordinal-number" value="1"/>
+                <parameter name="goods-name" value="Арахисовая паста"/>
             </class>
             <class name="com.epam.cdp.kzta2020.tests.CategoryFilterTest">
                 <parameter name="goods-nearer-to-head-of-list" value="1"/>
                 <parameter name="goods-nearer-to-end-of-list" value="2"/>
+                <parameter name="author-name" value="Брэдбери"/>
             </class>
             <class name="com.epam.cdp.kzta2020.tests.PriceFilterDragTest"/>
 <!--            <class name="com.epam.cdp.kzta2020.tests.PasswordChangeTest" />-->

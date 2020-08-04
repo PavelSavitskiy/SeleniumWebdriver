@@ -14,19 +14,20 @@ public class CategoryFilterTest extends BasicTest {
     private int authorFilter;
     private int inStockFilter;
 
+    @Parameters({"author-name"})
     @BeforeClass(description = "Search element by catalog, use two filters and apply sorting by price down")
-    public void chooseGoodsThroughDifferentFilters() {
+    public void chooseGoodsThroughDifferentFilters(@Optional("Стругацкий") String authorName) {
         mainPage.navigateMousePointerToElement(LocatorsHolder.BOOKS_CATEGORY);
         searchPage = mainPage.chooseCategoryOrSubCategory(LocatorsHolder.FANTASY_BOOK_SUB_CATEGORY);
         searchPage.getDriver().findElement(LocatorsHolder.FILTER_SOON_ON_SALE_CHECKBOX);
-        searchPage.chooseFilterWithInputField(LocatorsHolder.FIRST_FILTER_INPUT, "Р.Брэдбери",
-                LocatorsHolder.LIST_AFTER_FILTER_CHOSEN_FOR_BRADBURY);
+        searchPage.chooseFilterWithInputField(LocatorsHolder.FIRST_FILTER_INPUT, authorName,
+                SearchPage.chooseAuthorAfterFillingInFilterInputForm(authorName));
         searchPage.waitForElementPresent(LocatorsHolder.FILTER_AUTHOR_BUTTON);
         searchPage.clickElements(LocatorsHolder.FILTER_IS_IN_STOCK_CHECK_BOX);
         searchPage.waitForElementPresent(LocatorsHolder.FILTER_IS_IN_STOCK_BUTTON);
         quantityOfGoodsOnPage = searchPage.getResults().size();
         inStockFilter = searchPage.getDriver().findElements((LocatorsHolder.IN_STOCK_LABEL)).size();
-        authorFilter = searchPage.getDriver().findElements((LocatorsHolder.BRADBURY_LABEL)).size();
+        authorFilter = searchPage.getDriver().findElements((SearchPage.getElementsLocatorWithAuthorLabel(authorName))).size();
     }
 
     @Test(description = "Check that is-stock filter works properly")
