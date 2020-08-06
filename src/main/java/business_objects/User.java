@@ -1,7 +1,5 @@
 package business_objects;
 
-import com.epam.cdp.kzta2020.pages.Page;
-
 public class User {
     private String login;
     private String password;
@@ -20,9 +18,5 @@ public class User {
 
     public String getPassword() {
         return password;
-    }
-
-    public String getNewPassword() {
-        return newPassword;
     }
 }

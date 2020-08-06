@@ -1,9 +1,9 @@
-package utils;
+package selenide_utils;
 
-import java.util.List;
+import com.codeborne.selenide.ElementsCollection;
 import java.util.Random;
 
-public class RandomOrdinalNumberOfGoodsOnPage {
+public class RandomOrdinalNumberOfGoodsOnPageSelenide {
     private int quantityOfGoodsOnPage;
     private int ordinalNumber;
 
@@ -11,7 +11,7 @@ public class RandomOrdinalNumberOfGoodsOnPage {
         return ordinalNumber;
     }
 
-    public RandomOrdinalNumberOfGoodsOnPage(List list) {
+    public RandomOrdinalNumberOfGoodsOnPageSelenide(ElementsCollection list) {
         this.quantityOfGoodsOnPage = list.size();
         this.ordinalNumber = new Random().nextInt(quantityOfGoodsOnPage) + 1;
     }

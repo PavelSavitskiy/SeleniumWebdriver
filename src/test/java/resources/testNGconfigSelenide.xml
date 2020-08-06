@@ -1,0 +1,21 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="SelenideSuite" verbose="1">
+    <test name="SelenideTest" >
+        <classes>
+            <class name="com.epam.cdp.kzta2020.selenid_tests.LogInTestSelenide" />
+            <class name="com.epam.cdp.kzta2020.selenid_tests.SearchPageTestSelenide" >
+                <parameter name="request" value="Пазлы"/>
+            </class>
+            <class name="com.epam.cdp.kzta2020.selenid_tests.AddGoodsToCartTestSelenide">
+                <parameter name="goods-name" value="Арахисовая паста"/>
+            </class>
+            <class name="com.epam.cdp.kzta2020.selenid_tests.CategoryFilterTestSelenide">
+                <parameter name="goods-nearer-to-head-of-list" value="1"/>
+                <parameter name="goods-nearer-to-end-of-list" value="2"/>
+                <parameter name="author-name" value="Брэдбери"/>
+            </class>
+            <class name="com.epam.cdp.kzta2020.selenid_tests.PriceFilterDrugTestSelenide"/>
+        </classes>
+    </test>
+</suite>
