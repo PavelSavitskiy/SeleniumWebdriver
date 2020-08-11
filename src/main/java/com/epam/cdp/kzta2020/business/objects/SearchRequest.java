@@ -1,4 +1,4 @@
-package business_objects;
+package com.epam.cdp.kzta2020.business.objects;
 
 public class SearchRequest {
     private String requestString;
@@ -11,7 +11,7 @@ public class SearchRequest {
         return requestString;
     }
 
-    public static SearchRequest newRequest(String request){
+    public static SearchRequest newRequest(String request) {
         return new SearchRequest(request);
     }
 }

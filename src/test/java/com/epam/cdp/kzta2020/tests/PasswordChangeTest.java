@@ -1,12 +1,12 @@
 package com.epam.cdp.kzta2020.tests;
 
-import com.epam.cdp.kzta2020.pages.LocatorsHolder;
+import com.epam.cdp.kzta2020.locators.LocatorsHolder;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static business_objects.Users.user1;
+import static com.epam.cdp.kzta2020.business.objects.Users.user1;
 
 public class PasswordChangeTest extends BasicTest {
 

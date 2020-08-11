@@ -1,7 +1,7 @@
 package com.epam.cdp.kzta2020.tests;
 
-import business_objects.SearchRequest;
-import com.epam.cdp.kzta2020.pages.LocatorsHolder;
+import com.epam.cdp.kzta2020.business.objects.SearchRequest;
+import com.epam.cdp.kzta2020.locators.LocatorsHolder;
 import com.epam.cdp.kzta2020.pages.MainPage;
 import com.epam.cdp.kzta2020.pages.SearchPage;
 import org.testng.Assert;
@@ -10,7 +10,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
-import static business_objects.SearchRequest.newRequest;
+import static com.epam.cdp.kzta2020.business.objects.SearchRequest.newRequest;
 
 public class PriceFilterDragTest extends BasicTest {
     private SearchRequest request;
@@ -35,8 +35,8 @@ public class PriceFilterDragTest extends BasicTest {
     @Test(description = "Confirm, goods are on price bounds after price filter")
     public void priceFilterDrugTest() {
         mainPage.search(request).dragAndDropElements(LocatorsHolder.PRICE_FILTER_RIGHT_POINT, xOffsetRight, yOffsetRight);
-        searchPage.dragAndDropElements(LocatorsHolder.PRICE_FILTER_LEFT_POINT, xOffsetLeft, yOffsetLeft).
-                clickElements(LocatorsHolder.PRICE_FILTER_APPLY_BUTTON);
+        searchPage.dragAndDropElements(LocatorsHolder.PRICE_FILTER_LEFT_POINT, xOffsetLeft, yOffsetLeft);
+        searchPage.clickElements(LocatorsHolder.PRICE_FILTER_APPLY_BUTTON);
         Assert.assertTrue(searchPage.compareActualGoodsPriceWithPriceFilterValue(
                 SearchPage.choosePriceFromListAfterSearch(goodsOrdinalNumber)), "Filter didn't worked as was expected");
     }
@@ -53,7 +53,7 @@ public class PriceFilterDragTest extends BasicTest {
         };
     }
 
-    @AfterMethod(description = "Additional clear up for search input field dye to firefox browser" +
+    @AfterMethod(description = "Additional clear up for search input field due to firefox browser" +
             " doesn't always clear it the first time ")
     public void clearSearchInput() {
         new MainPage().clearSearchInput();

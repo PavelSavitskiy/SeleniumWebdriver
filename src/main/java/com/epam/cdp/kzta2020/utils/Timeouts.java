@@ -1,4 +1,4 @@
-package utils;
+package com.epam.cdp.kzta2020.utils;
 
 public enum Timeouts {
     ZERO_WAITING(0),

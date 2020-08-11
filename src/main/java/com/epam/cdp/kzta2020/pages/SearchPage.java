@@ -1,12 +1,12 @@
 package com.epam.cdp.kzta2020.pages;
 
+import com.epam.cdp.kzta2020.locators.LocatorsHolder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import utils.RandomOrdinalNumberOfGoodsOnPage;
+import com.epam.cdp.kzta2020.utils.RandomOrdinalNumberOfGoodsOnPage;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public class SearchPage extends Page {
     private static String FORMATTED_STRING_FOR_GOODS_ORDINAL_NUMBER = "(//div[@class ='good-list-item ']/div/div/div[@class='price']/../../..)[%d]";
     private static String FORMATTED_STRING_FOR_SORTING_COMPARING = "(//div[@class='price'])[%d]";
     private static String LIST_AFTER_AUTHOR_FILTER_CHOSEN = "(//a[contains(text(),'%s')])[1]";
-    private static String  AUTHOR_LABEL =" //div[@class='add-info']/span[contains(text(),'%s')]";
+    private static String AUTHOR_LABEL = " //div[@class='add-info']/span[contains(text(),'%s')]";
 
     public SearchPage addGoods(By linkToGoodsFromList) {
         clickElements(linkToGoodsFromList);
@@ -26,8 +26,7 @@ public class SearchPage extends Page {
     }
 
     public SearchPage chooseFilterWithInputField(By filterLocator, String request, By foundListLocator) {
-        highLightElement(filterLocator);
-        sendKeysTeElement(filterLocator, request);
+        sendKeysToElement(filterLocator, request);
         clickElements(foundListLocator);
         return new SearchPage();
     }
@@ -45,8 +44,6 @@ public class SearchPage extends Page {
 
 
     public boolean compareAreGoodsSortedByPriceReduction(By firstGoods, By secondGoods) {
-        highLightElement(firstGoods);
-        highLightElement(secondGoods);
         double firstPrice = Double.parseDouble((this.getDriver().findElement(firstGoods).getText()).
                 replaceAll("(\\s|\\.|[а-я])", ""));
         double secondPrice = Double.parseDouble((this.getDriver().findElement(secondGoods).getText()).
@@ -62,24 +59,15 @@ public class SearchPage extends Page {
         return By.xpath(String.format(FORMATTED_STRING_FOR_SORTING_COMPARING, num));
     }
 
-    public static By chooseAuthorAfterFillingInFilterInputForm(String name){
-        return By.xpath(String.format(LIST_AFTER_AUTHOR_FILTER_CHOSEN,name));
+    public static By chooseAuthorAfterFillingInFilterInputForm(String name) {
+        return By.xpath(String.format(LIST_AFTER_AUTHOR_FILTER_CHOSEN, name));
     }
 
-    public static By getElementsLocatorWithAuthorLabel(String name){
-        return By.xpath(String.format(AUTHOR_LABEL,name));
-    }
-
-    public SearchPage dragAndDropElements(By locator, int x, int y) {
-        highLightElement(locator);
-        waitForElementPresent(locator);
-        new Actions(getDriver()).dragAndDropBy(getDriver().findElement(locator), x, y).build().perform();
-        return this;
+    public static By getElementsLocatorWithAuthorLabel(String name) {
+        return By.xpath(String.format(AUTHOR_LABEL, name));
     }
 
     public boolean compareActualGoodsPriceWithPriceFilterValue(By locator) {
-        highLightElement(LocatorsHolder.PRICE_ABOVE_PRICE_FILTER_LEFT);
-        highLightElement(LocatorsHolder.PRICE_ABOVE_PRICE_FILTER_RIGHT);
         double leftPrice;
         double rightPrice;
         while (true) {

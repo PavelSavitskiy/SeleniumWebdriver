@@ -5,7 +5,7 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-import static business_objects.SearchRequest.newRequest;
+import static com.epam.cdp.kzta2020.business.objects.SearchRequest.newRequest;
 
 public class SearchPageTest extends BasicTest {
     private final int ITEMS_ON_SEARCH_PAGE_QUANTITY = 60;

@@ -1,10 +1,9 @@
 package com.epam.cdp.kzta2020.tests;
 
-import com.epam.cdp.kzta2020.pages.DriverSingleton;
+import com.epam.cdp.kzta2020.webdriver.DriverSingleton;
 import com.epam.cdp.kzta2020.pages.CartPage;
 import com.epam.cdp.kzta2020.pages.LoginPage;
 import com.epam.cdp.kzta2020.pages.MainPage;
-import com.epam.cdp.kzta2020.pages.Page;
 import com.epam.cdp.kzta2020.pages.PasswordChangePage;
 import com.epam.cdp.kzta2020.pages.SearchPage;
 import com.epam.cdp.kzta2020.pages.UserSectionPage;
@@ -19,11 +18,9 @@ public abstract class BasicTest {
     SearchPage searchPage;
     CartPage cartPage;
 
-
     @BeforeClass(description = "Initialize browser, initialize pages drivers")
     public void openBrowser() {
         DriverSingleton.init();
-        DriverSingleton.getWebDriverSingleton().get(Page.getProperties("homepageFlipKz"));
         mainPage = new MainPage();
         userSectionPage = new UserSectionPage();
         passwordChangePage = new PasswordChangePage();

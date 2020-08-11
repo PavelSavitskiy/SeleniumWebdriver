@@ -1,4 +1,4 @@
-package utils;
+package com.epam.cdp.kzta2020.utils;
 
 import java.util.List;
 import java.util.Random;

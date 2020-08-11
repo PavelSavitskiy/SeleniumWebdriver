@@ -1,6 +1,6 @@
 package com.epam.cdp.kzta2020.tests;
 
-import com.epam.cdp.kzta2020.pages.LocatorsHolder;
+import com.epam.cdp.kzta2020.locators.LocatorsHolder;
 import com.epam.cdp.kzta2020.pages.SearchPage;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;

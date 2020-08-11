@@ -1,17 +1,15 @@
-package business_objects;
+package com.epam.cdp.kzta2020.business.objects;
 
-import com.epam.cdp.kzta2020.pages.Page;
-
-public class User {
+public class OrdinaryUser implements User {
     private String login;
     private String password;
     private String newPassword;
 
 
-    public User(String login,String password,String newPassword){
-        this.login= login;
-        this.password=password;
-        this.newPassword=newPassword;
+    public OrdinaryUser(String login, String password, String newPassword) {
+        this.login = login;
+        this.password = password;
+        this.newPassword = newPassword;
     }
 
     public String getLogin() {

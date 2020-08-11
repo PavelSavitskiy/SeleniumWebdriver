@@ -1,4 +1,4 @@
-package com.epam.cdp.kzta2020.pages;
+package com.epam.cdp.kzta2020.locators;
 
 import org.openqa.selenium.By;
 
