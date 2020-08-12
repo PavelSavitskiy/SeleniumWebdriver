@@ -1,7 +1,5 @@
 package com.epam.cdp.kzta2020.business.objects;
 
-import java.util.regex.Pattern;
-
 public class OrdinaryUser implements User {
     private String login;
     private String password;
@@ -40,13 +38,13 @@ public class OrdinaryUser implements User {
         private String lastName;
         private String firstName;
 
-        OrdinaryUserBuilder(String login, String password, String newPassword) {
+        public OrdinaryUserBuilder(String login, String password, String newPassword) {
             this.login = login;
             this.password = password;
             this.newPassword = newPassword;
         }
 
-        OrdinaryUserBuilder setPersonalData(String firstName, String lastName) {
+        public OrdinaryUserBuilder setPersonalData(String firstName, String lastName) {
             this.firstName = firstName;
             this.lastName = lastName;
             return this;
@@ -56,7 +54,7 @@ public class OrdinaryUser implements User {
             return firstName + " " + lastName;
         }
 
-        OrdinaryUserBuilder build() throws Exception {
+        public OrdinaryUserBuilder build() throws Exception {
                 if(!(this.getPersonalData().matches("(\\w*[^\\d*])\\s(\\w*[^\\d*])")))
             throw new Exception("Name or lastname can't contain figures or special signs");
             else return this;

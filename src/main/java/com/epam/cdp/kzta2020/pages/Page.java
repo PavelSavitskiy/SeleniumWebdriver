@@ -1,11 +1,14 @@
 package com.epam.cdp.kzta2020.pages;
 
+import com.epam.cdp.kzta2020.business.objects.User;
 import com.epam.cdp.kzta2020.elements.ElementWrapper;
 import com.epam.cdp.kzta2020.locators.LocatorsHolder;
 import com.epam.cdp.kzta2020.webdriver.DriverSingleton;
 import org.openqa.selenium.By;
+import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.NotFoundException;
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -13,12 +16,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import com.epam.cdp.kzta2020.utils.Timeouts;
 
+import java.util.List;
+import java.util.Random;
+
 public abstract class Page {
     protected static WebDriver driver;
     private WebElement webElement;
 
     public Page() {
-        this.driver = DriverSingleton.getWebDriverSingleton();
+        driver = DriverSingleton.getWebDriverSingleton();
     }
 
     public static WebDriver getDriver() {
@@ -53,10 +59,8 @@ public abstract class Page {
                 webElement = new ElementWrapper(webElement);
                 webElement.click();
                 break;
-            } catch (Exception exception) {
-                if (exception instanceof TimeoutException) {
-                    break;
-                }
+            } catch (StaleElementReferenceException| ElementNotVisibleException| NotFoundException exception) {
+                
             }
         }
     }
@@ -99,5 +103,18 @@ public abstract class Page {
 
     public void waitPreciseQuantityOfElementsOnPage(By locator, int quantity) {
         new WebDriverWait(getDriver(), Timeouts.ORDINARY_WAITING.getSeconds()).until(ExpectedConditions.numberOfElementsToBeMoreThan(locator, quantity));
+    }
+
+    public static By getLocator(User user) {
+        return By.xpath("//span[contains (text(), '" + user.getPersonalData() + "')]");
+    }
+
+    public static int randomOrdinalNumberOfGoodsOnPage(List list) {
+         int quantityOfGoodsOnPage;
+         int ordinalNumber;
+        quantityOfGoodsOnPage = list.size();
+        ordinalNumber = new Random().nextInt(quantityOfGoodsOnPage) + 1;
+        return ordinalNumber;
+
     }
 }

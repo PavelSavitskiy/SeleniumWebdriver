@@ -9,9 +9,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.AfterClass;
-
-import static com.epam.cdp.kzta2020.business.objects.SearchRequest.newRequest;
-import static com.epam.cdp.kzta2020.business.objects.Users.user1;
+import static com.epam.cdp.kzta2020.utils.Users.user1;
 
 public class AddGoodsToCartTest extends BasicTest {
     private int quantityOfGoodsBefore;
@@ -26,7 +24,7 @@ public class AddGoodsToCartTest extends BasicTest {
     @Test(description = "Check that goods were added")
     public void addingGoodsTest(@Optional("Паста") String goodsName) {
         quantityOfGoodsBefore = mainPage.goToCart().countGoods().getCurQuantOfGoods();
-        mainPage.search(newRequest(goodsName)).
+        mainPage.search(goodsName).
                 addGoods(SearchPage.chooseGoodsFromListAfterSearch(searchPage.getResults()));
         currentQuantityOfGoods = searchPage.goToCart().countGoods().getCurQuantOfGoods();
         Assert.assertEquals(currentQuantityOfGoods, quantityOfGoodsBefore + 1,

@@ -1,6 +1,7 @@
-package com.epam.cdp.kzta2020.business.objects;
+package com.epam.cdp.kzta2020.utils;
 
-import com.epam.cdp.kzta2020.utils.PropertiesReader;
+import com.epam.cdp.kzta2020.business.objects.OrdinaryUser;
+import com.epam.cdp.kzta2020.business.objects.User;
 
 public abstract class Users {
     private static PropertiesReader confPropReader = new PropertiesReader();
@@ -21,5 +22,4 @@ public abstract class Users {
             e.printStackTrace();
         }
     }
-
 }

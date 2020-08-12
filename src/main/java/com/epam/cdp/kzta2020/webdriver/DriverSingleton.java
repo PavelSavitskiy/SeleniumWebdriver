@@ -30,17 +30,17 @@ public class DriverSingleton {
             creator = new FirefoxDriverCreator();
             webDriverSingleton = creator.createDriver();
         }
+        if (driverType.equals(FIREFOX_REMOTE)) {
+            creator = new FirefoxDriverCreator();
+            webDriverSingleton = creator.createRemoteDriver();
+        }
         if (driverType.equals(CHROME)) {
             creator = new ChromeDriverCreator();
             webDriverSingleton = creator.createDriver();
         }
-        if (driverType.equals(FIREFOX_REMOTE)) {
-            creator = new FirefoxRemoteDriverCreator();
-            webDriverSingleton = creator.createDriver();
-        }
         if (driverType.equals(CHROME_REMOTE)) {
-            creator = new ChromeRemoteDriverCreator();
-            webDriverSingleton = creator.createDriver();
+            creator = new ChromeDriverCreator();
+            webDriverSingleton = creator.createRemoteDriver();
         }
         webDriverSingleton.manage().timeouts().implicitlyWait(Timeouts.ORDINARY_WAITING.getSeconds(), TimeUnit.SECONDS);
         webDriverSingleton.get(confPropReader.getProperties("homepageFlipKz"));

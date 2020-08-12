@@ -1,6 +1,5 @@
 package com.epam.cdp.kzta2020.tests;
 
-import com.epam.cdp.kzta2020.business.objects.SearchRequest;
 import com.epam.cdp.kzta2020.locators.LocatorsHolder;
 import com.epam.cdp.kzta2020.pages.MainPage;
 import com.epam.cdp.kzta2020.pages.SearchPage;
@@ -10,10 +9,8 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
-import static com.epam.cdp.kzta2020.business.objects.SearchRequest.newRequest;
-
 public class PriceFilterDragTest extends BasicTest {
-    private SearchRequest request;
+    private String request;
     private int goodsOrdinalNumber;
     private int xOffsetRight;
     private int yOffsetRight;
@@ -22,7 +19,7 @@ public class PriceFilterDragTest extends BasicTest {
 
 
     @Factory(dataProvider = "DragAndDropDataProvider")
-    public PriceFilterDragTest(SearchRequest request, int goodsOrdinalNumber,
+    public PriceFilterDragTest(String request, int goodsOrdinalNumber,
                                int xOffsetRight, int yOffsetRight, int xOffsetLeft, int yOffsetLeft) {
         this.request = request;
         this.goodsOrdinalNumber = goodsOrdinalNumber;
@@ -44,12 +41,12 @@ public class PriceFilterDragTest extends BasicTest {
     @DataProvider(name = "DragAndDropDataProvider")
     public static Object[][] divDataProvider() {
         return new Object[][]{
-                {newRequest("Велосипед"), 4, -80, 0, 2, 0},
-                {newRequest("Пальто"), 1, -100, 0, 1, 0},
-                {newRequest("Машина"), 3, -90, 0, 1, 0},
-                {newRequest("Кроссовки"), 1, -150, 0, 1, 0},
-                {newRequest("Куртка"), 1, -130, 0, 0, 0},
-                {newRequest("Клавиатура"), 3, -140, 0, 1, 0}
+                {"Велосипед", 4, -80, 0, 2, 0},
+                {"Пальто", 1, -100, 0, 1, 0},
+                {"Машина", 3, -90, 0, 1, 0},
+                {"Кроссовки", 1, -150, 0, 1, 0},
+                {"Куртка", 1, -130, 0, 0, 0},
+                {"Клавиатура", 3, -140, 0, 1, 0}
         };
     }
 

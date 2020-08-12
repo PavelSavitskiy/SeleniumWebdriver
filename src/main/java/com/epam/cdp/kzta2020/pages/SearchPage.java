@@ -6,7 +6,6 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import com.epam.cdp.kzta2020.utils.RandomOrdinalNumberOfGoodsOnPage;
 
 import java.util.List;
 
@@ -52,7 +51,8 @@ public class SearchPage extends Page {
     }
 
     public static By chooseGoodsFromListAfterSearch(List list) {   //where "number" is ordinal number of goods on the search page
-        return By.xpath(String.format(FORMATTED_STRING_FOR_GOODS_ORDINAL_NUMBER, new RandomOrdinalNumberOfGoodsOnPage(list).getNumber()));
+        return By.xpath(String.format(FORMATTED_STRING_FOR_GOODS_ORDINAL_NUMBER,
+                SearchPage.randomOrdinalNumberOfGoodsOnPage(list)));
     }
 
     public static By choosePriceFromListAfterSearch(int num) {   //where "number" is ordinal number of goods on the search page
@@ -91,4 +91,6 @@ public class SearchPage extends Page {
                 replaceAll("(\\s|\\.|[а-я])", ""));
         return ((goodsPrice >= leftPrice) | (goodsPrice <= rightPrice));
     }
+
+
 }

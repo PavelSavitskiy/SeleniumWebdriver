@@ -1,12 +1,11 @@
 package com.epam.cdp.kzta2020.tests;
 
-import com.epam.cdp.kzta2020.utils.PersonalDataLocatorGenerator;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.epam.cdp.kzta2020.business.objects.Users.user1;
+import static com.epam.cdp.kzta2020.utils.Users.user1;
 
 public class PasswordChangeTest extends BasicTest {
 
@@ -20,7 +19,7 @@ public class PasswordChangeTest extends BasicTest {
         passwordChangePage = mainPage.goToUserSectionPage().chooseChangePasswordSubSection();
         passwordChangePage.changePassword(user1);
         passwordChangePage.logOut().goToLoginPage().logInFillInFormsNewPassword(user1);
-        Assert.assertTrue(mainPage.isElementPresent(PersonalDataLocatorGenerator.getLocator(user1)),
+        Assert.assertTrue(mainPage.isElementPresent(mainPage.getLocator(user1)),
                 "Password wasn't changed properly");
     }
 
