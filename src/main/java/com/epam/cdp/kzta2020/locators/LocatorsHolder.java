@@ -10,7 +10,6 @@ public class LocatorsHolder {
     public static final By LOGIN_FIELD = By.id("email");
     public static final By PASSWORD_FIELD = By.id("pass");
     public static final By LOGIN_SUBMIT_BUTTON = By.id("enter_button");
-    public static final By USER_NAME_SHOWER = By.xpath("//span[contains (text(), 'Павел')]");
     /////////////SEARCH VARIABLES////////////
     public static final By SEARCH_INPUT = By.id("search_input");
     public static final By SEARCH_BUTTON = By.xpath("//input[@value='Найти']");

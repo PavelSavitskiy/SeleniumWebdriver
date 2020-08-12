@@ -7,4 +7,6 @@ public interface User {
     String getPassword();
 
     String getNewPassword();
+
+    String getPersonalData();
 }

@@ -1,15 +1,20 @@
 package com.epam.cdp.kzta2020.business.objects;
 
+import java.util.regex.Pattern;
+
 public class OrdinaryUser implements User {
     private String login;
     private String password;
     private String newPassword;
+    private String lastName;
+    private String firstName;
 
-
-    public OrdinaryUser(String login, String password, String newPassword) {
-        this.login = login;
-        this.password = password;
-        this.newPassword = newPassword;
+    public OrdinaryUser(OrdinaryUserBuilder ordinaryUserBuilder) {
+        this.login = ordinaryUserBuilder.login;
+        this.password = ordinaryUserBuilder.password;
+        this.newPassword = ordinaryUserBuilder.newPassword;
+        this.firstName = ordinaryUserBuilder.firstName;
+        this.lastName = ordinaryUserBuilder.lastName;
     }
 
     public String getLogin() {
@@ -22,5 +27,39 @@ public class OrdinaryUser implements User {
 
     public String getNewPassword() {
         return newPassword;
+    }
+
+    public String getPersonalData() {
+        return firstName + " " + lastName;
+    }
+
+    public static class OrdinaryUserBuilder {
+        private String login;
+        private String password;
+        private String newPassword;
+        private String lastName;
+        private String firstName;
+
+        OrdinaryUserBuilder(String login, String password, String newPassword) {
+            this.login = login;
+            this.password = password;
+            this.newPassword = newPassword;
+        }
+
+        OrdinaryUserBuilder setPersonalData(String firstName, String lastName) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            return this;
+        }
+
+        public String getPersonalData() {
+            return firstName + " " + lastName;
+        }
+
+        OrdinaryUserBuilder build() throws Exception {
+                if(!(this.getPersonalData().matches("(\\w*[^\\d*])\\s(\\w*[^\\d*])")))
+            throw new Exception("Name or lastname can't contain figures or special signs");
+            else return this;
+        }
     }
 }
