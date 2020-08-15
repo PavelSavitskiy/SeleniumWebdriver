@@ -2,10 +2,10 @@ package com.epam.cdp.kzta2020.pages;
 
 import com.epam.cdp.kzta2020.locators.LocatorsHolder;
 import org.openqa.selenium.WebElement;
-import com.epam.cdp.kzta2020.utils.Timeouts;
-
 import java.util.List;
-import java.util.concurrent.TimeUnit;
+import static com.epam.cdp.kzta2020.utils.Timeouts.ORDINARY_WAITING;
+import static com.epam.cdp.kzta2020.utils.Timeouts.ZERO_WAITING;
+import static com.epam.cdp.kzta2020.webdriver.DriverSingleton.setDriverTimeOut;
 
 public class CartPage extends Page {
     private int currentQuantityOfGoods;
@@ -15,10 +15,10 @@ public class CartPage extends Page {
     }
 
     public CartPage countGoods() {
-        getDriver().manage().timeouts().implicitlyWait(Timeouts.ZERO_WAITING.getSeconds(), TimeUnit.SECONDS);
+        setDriverTimeOut(ZERO_WAITING);
         List<WebElement> listOfGoods;
         listOfGoods = getDriver().findElements(LocatorsHolder.DELETE_GOODS_BUTTON);
-        getDriver().manage().timeouts().implicitlyWait(Timeouts.ORDINARY_WAITING.getSeconds(), TimeUnit.SECONDS);
+        setDriverTimeOut(ORDINARY_WAITING);
         currentQuantityOfGoods = listOfGoods.size();
         return this;
     }

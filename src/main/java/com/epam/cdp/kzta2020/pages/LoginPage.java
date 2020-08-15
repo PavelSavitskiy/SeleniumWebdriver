@@ -5,17 +5,22 @@ import com.epam.cdp.kzta2020.locators.LocatorsHolder;
 
 public class LoginPage extends Page {
 
-    public LoginPage logInFillInForms(User user) {
+    public void  fillInLoginForm(User user){
         sendKeysToElement(LocatorsHolder.LOGIN_FIELD, user.getLogin());
-        sendKeysToElement(LocatorsHolder.PASSWORD_FIELD, user.getPassword());
-        clickElementsJavaScript(LocatorsHolder.LOGIN_SUBMIT_BUTTON);
-        return this;
     }
 
-    public LoginPage logInFillInFormsNewPassword(User user) {
-        sendKeysToElement(LocatorsHolder.LOGIN_FIELD, user.getLogin());
-        sendKeysToElement(LocatorsHolder.PASSWORD_FIELD, user.getNewPassword());
+    public void fillInPasswordForm(User user){
+        sendKeysToElement(LocatorsHolder.PASSWORD_FIELD, user.getPassword());
+    }
+
+    public void clickLoginSubmit(){
         clickElementsJavaScript(LocatorsHolder.LOGIN_SUBMIT_BUTTON);
+    }
+
+    public LoginPage signIn(User user) {
+        this.fillInLoginForm(user);
+        this.fillInPasswordForm(user);
+        this.clickLoginSubmit();
         return this;
     }
 }

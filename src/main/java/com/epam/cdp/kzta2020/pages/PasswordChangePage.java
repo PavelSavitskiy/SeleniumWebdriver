@@ -1,23 +1,30 @@
 package com.epam.cdp.kzta2020.pages;
 
-import com.epam.cdp.kzta2020.business.objects.User;
 import com.epam.cdp.kzta2020.locators.LocatorsHolder;
 
 public class PasswordChangePage extends Page {
 
-    public PasswordChangePage changePassword(User user) {
-        sendKeysToElement(LocatorsHolder.OLD_PASSWORD_INPUT, user.getPassword());
-        sendKeysToElement(LocatorsHolder.NEW_PASSWORD_INPUT, user.getNewPassword());
-        sendKeysToElement(LocatorsHolder.RETRY_PASSWORD_INPUT, user.getNewPassword());
-        clickElements(LocatorsHolder.PASSWORD_SAVE_BUTTON);
-        return this;
+    public void fillInOldPasswordField(String oldPassword){
+        sendKeysToElement(LocatorsHolder.OLD_PASSWORD_INPUT,oldPassword);
     }
 
-    public PasswordChangePage revertPassword(User user) {
-        sendKeysToElement(LocatorsHolder.OLD_PASSWORD_INPUT, user.getNewPassword());
-        sendKeysToElement(LocatorsHolder.NEW_PASSWORD_INPUT, user.getPassword());
-        sendKeysToElement(LocatorsHolder.RETRY_PASSWORD_INPUT, user.getPassword());
+    public void fillINewPasswordField(String newPassword){
+        sendKeysToElement(LocatorsHolder.NEW_PASSWORD_INPUT,newPassword);
+    }
+
+    public void retryNewPasswordField(String newPassword){
+        sendKeysToElement(LocatorsHolder.RETRY_PASSWORD_INPUT,newPassword);
+    }
+
+    public void savePasswordAfterChange(){
         clickElements(LocatorsHolder.PASSWORD_SAVE_BUTTON);
+    }
+
+    public PasswordChangePage changePassword(String password, String newPassword) {
+        this.fillInOldPasswordField(password);
+        this.fillINewPasswordField(newPassword);
+        this.retryNewPasswordField(newPassword);
+        this.savePasswordAfterChange();
         return this;
     }
 }

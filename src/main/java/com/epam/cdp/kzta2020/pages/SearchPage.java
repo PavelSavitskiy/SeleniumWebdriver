@@ -10,10 +10,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 
 public class SearchPage extends Page {
-    private static String FORMATTED_STRING_FOR_GOODS_ORDINAL_NUMBER = "(//div[@class ='good-list-item ']/div/div/div[@class='price']/../../..)[%d]";
-    private static String FORMATTED_STRING_FOR_SORTING_COMPARING = "(//div[@class='price'])[%d]";
-    private static String LIST_AFTER_AUTHOR_FILTER_CHOSEN = "(//a[contains(text(),'%s')])[1]";
-    private static String AUTHOR_LABEL = " //div[@class='add-info']/span[contains(text(),'%s')]";
+
+    private static final String FORMATTED_STRING_FOR_GOODS_ORDINAL_NUMBER = "(//div[@class ='good-list-item ']/div/div/div[@class='price']/../../..)[%d]";
+    private static final String FORMATTED_STRING_FOR_SORTING_COMPARING = "(//div[@class='price'])[%d]";
+    private static final String LIST_AFTER_AUTHOR_FILTER_CHOSEN = "(//a[contains(text(),'%s')])[1]";
+    private static final String AUTHOR_LABEL = " //div[@class='add-info']/span[contains(text(),'%s')]";
 
     public SearchPage addGoods(By linkToGoodsFromList) {
         clickElements(linkToGoodsFromList);
@@ -42,10 +43,10 @@ public class SearchPage extends Page {
     }
 
 
-    public boolean compareAreGoodsSortedByPriceReduction(By firstGoods, By secondGoods) {
-        double firstPrice = Double.parseDouble((this.getDriver().findElement(firstGoods).getText()).
+    public boolean compareGoodsSortedByPriceReduction(By firstGoods, By secondGoods) {
+        double firstPrice = Double.parseDouble((getText(firstGoods)).
                 replaceAll("(\\s|\\.|[а-я])", ""));
-        double secondPrice = Double.parseDouble((this.getDriver().findElement(secondGoods).getText()).
+        double secondPrice = Double.parseDouble((getText(secondGoods)).
                 replaceAll("(\\s|\\.|[а-я])", ""));
         return (firstPrice > secondPrice);
     }
@@ -87,10 +88,8 @@ public class SearchPage extends Page {
             }
         }
         waitForElementPresent(locator);
-        double goodsPrice = Double.parseDouble((this.getDriver().findElement(locator).getText()).
+        double goodsPrice = Double.parseDouble((getText(locator)).
                 replaceAll("(\\s|\\.|[а-я])", ""));
         return ((goodsPrice >= leftPrice) | (goodsPrice <= rightPrice));
     }
-
-
 }

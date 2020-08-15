@@ -6,7 +6,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class SearchPageTest extends BasicTest {
-    private final int ITEMS_ON_SEARCH_PAGE_QUANTITY = 60;
+    private static final int ITEMS_ON_SEARCH_PAGE_QUANTITY = 60;
     private int results;
 
     @Parameters({"request"})

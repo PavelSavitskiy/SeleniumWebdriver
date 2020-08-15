@@ -17,7 +17,7 @@ public class AddGoodsToCartTest extends BasicTest {
 
     @BeforeClass(description = "Log in")
     public void login() {
-        loginPage = mainPage.goToLoginPage().logInFillInForms(user1);
+        loginPage = mainPage.goToLoginPage().signIn(user1);
     }
 
     @Parameters({"goods-name"})

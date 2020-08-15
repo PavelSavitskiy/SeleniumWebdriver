@@ -6,7 +6,7 @@ public interface User {
 
     String getPassword();
 
-    String getNewPassword();
-
     String getPersonalData();
+
+    void setPassword(String newPassword);
 }

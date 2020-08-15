@@ -6,6 +6,8 @@ import com.epam.cdp.kzta2020.utils.Timeouts;
 
 import java.util.concurrent.TimeUnit;
 
+import static com.epam.cdp.kzta2020.utils.Timeouts.ORDINARY_WAITING;
+
 public class DriverSingleton {
     private static WebDriver webDriverSingleton;
     private static final String CHROME = "chrome";
@@ -30,21 +32,26 @@ public class DriverSingleton {
             creator = new FirefoxDriverCreator();
             webDriverSingleton = creator.createDriver();
         }
-        if (driverType.equals(FIREFOX_REMOTE)) {
-            creator = new FirefoxDriverCreator();
-            webDriverSingleton = creator.createRemoteDriver();
-        }
         if (driverType.equals(CHROME)) {
             creator = new ChromeDriverCreator();
             webDriverSingleton = creator.createDriver();
+        }
+        if (driverType.equals(FIREFOX_REMOTE)) {
+            creator = new FirefoxDriverCreator();
+            webDriverSingleton = creator.createRemoteDriver();
         }
         if (driverType.equals(CHROME_REMOTE)) {
             creator = new ChromeDriverCreator();
             webDriverSingleton = creator.createRemoteDriver();
         }
-        webDriverSingleton.manage().timeouts().implicitlyWait(Timeouts.ORDINARY_WAITING.getSeconds(), TimeUnit.SECONDS);
+        setDriverTimeOut(ORDINARY_WAITING);
+        webDriverSingleton.manage().window().maximize();
         webDriverSingleton.get(confPropReader.getProperties("homepageFlipKz"));
         return webDriverSingleton;
+    }
+
+    public static void setDriverTimeOut(Timeouts timeOut){
+        getWebDriverSingleton().manage().timeouts().implicitlyWait(timeOut.getSeconds(), TimeUnit.SECONDS);
     }
 
     public static void quiteBrowser() {

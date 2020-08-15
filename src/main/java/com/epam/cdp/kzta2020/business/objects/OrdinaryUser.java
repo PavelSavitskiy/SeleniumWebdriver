@@ -23,12 +23,12 @@ public class OrdinaryUser implements User {
         return password;
     }
 
-    public String getNewPassword() {
-        return newPassword;
-    }
-
     public String getPersonalData() {
         return firstName + " " + lastName;
+    }
+
+    public void setPassword(String newPassword) {
+        password =newPassword;
     }
 
     public static class OrdinaryUserBuilder {

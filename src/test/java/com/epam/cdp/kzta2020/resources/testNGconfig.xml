@@ -20,7 +20,7 @@
             </class>
 
             <class name="com.epam.cdp.kzta2020.tests.PriceFilterDragTest"/>
-<!--            <class name="com.epam.cdp.kzta2020.tests.PasswordChangeTest" />-->
+            <class name="com.epam.cdp.kzta2020.tests.PasswordChangeTest" />
         </classes>
     </test>
 </suite>

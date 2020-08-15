@@ -59,9 +59,7 @@ public abstract class Page {
                 webElement = new ElementWrapper(webElement);
                 webElement.click();
                 break;
-            } catch (StaleElementReferenceException| ElementNotVisibleException| NotFoundException exception) {
-                
-            }
+            } catch (StaleElementReferenceException| ElementNotVisibleException| NotFoundException exception) {}
         }
     }
 
@@ -115,6 +113,9 @@ public abstract class Page {
         quantityOfGoodsOnPage = list.size();
         ordinalNumber = new Random().nextInt(quantityOfGoodsOnPage) + 1;
         return ordinalNumber;
+    }
 
+    public static String getText(By locator){
+        return getDriver().findElement(locator).getText();
     }
 }

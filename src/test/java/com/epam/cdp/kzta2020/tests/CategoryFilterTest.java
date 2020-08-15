@@ -47,7 +47,7 @@ public class CategoryFilterTest extends BasicTest {
     public void comparePricesAfterSorting(@Optional("1") int num1, @Optional("2") int num2) {
         searchPage.navigateMousePointerToElement(LocatorsHolder.SORT_DROP_DOWN_MENU);
         searchPage.clickElements(LocatorsHolder.SORT_DOWN_PRICE_SUB_MENU);
-        Assert.assertTrue(searchPage.compareAreGoodsSortedByPriceReduction
+        Assert.assertTrue(searchPage.compareGoodsSortedByPriceReduction
                         ((SearchPage.choosePriceFromListAfterSearch(num1)), (SearchPage.choosePriceFromListAfterSearch(num2))),
                 "Goods weren't sorted price down way.");
     }
