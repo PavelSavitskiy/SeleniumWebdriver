@@ -21,16 +21,16 @@ public class PasswordChangeTest extends BasicTest {
     @Test(description = "Change password, then log out, then log in with new one")
     public void passwordChangeTest() {
         passwordChangePage = mainPage.goToUserSectionPage().chooseChangePasswordSubSection();
-        passwordChangePage.changePassword(password,newPassword);
+        passwordChangePage.changePassword(password, newPassword);
         user1.setPassword(newPassword);
         passwordChangePage.logOut().goToLoginPage().signIn(user1);
         user1.setPassword(password);
-        Assert.assertTrue(mainPage.isElementPresent(mainPage.getLocator(user1)),
+        Assert.assertTrue(mainPage.isUserVisible(user1),
                 "Password wasn't changed properly");
     }
 
     @AfterClass(description = "Change password to old one", alwaysRun = true)
     public void changePasswordToOld() {
-        mainPage.goToUserSectionPage().chooseChangePasswordSubSection().changePassword(newPassword,password);
+        mainPage.goToUserSectionPage().chooseChangePasswordSubSection().changePassword(newPassword, password);
     }
 }

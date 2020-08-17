@@ -59,7 +59,8 @@ public abstract class Page {
                 webElement = new ElementWrapper(webElement);
                 webElement.click();
                 break;
-            } catch (StaleElementReferenceException| ElementNotVisibleException| NotFoundException exception) {}
+            } catch (StaleElementReferenceException | ElementNotVisibleException | NotFoundException exception) {
+            }
         }
     }
 
@@ -108,14 +109,20 @@ public abstract class Page {
     }
 
     public static int randomOrdinalNumberOfGoodsOnPage(List list) {
-         int quantityOfGoodsOnPage;
-         int ordinalNumber;
+        int quantityOfGoodsOnPage;
+        int ordinalNumber;
         quantityOfGoodsOnPage = list.size();
         ordinalNumber = new Random().nextInt(quantityOfGoodsOnPage) + 1;
         return ordinalNumber;
     }
 
-    public static String getText(By locator){
+    public static String getText(By locator) {
         return getDriver().findElement(locator).getText();
+    }
+
+    public boolean isUserVisible(User user) {
+        if (isElementPresent(getLocator(user)))
+            return true;
+        else return false;
     }
 }

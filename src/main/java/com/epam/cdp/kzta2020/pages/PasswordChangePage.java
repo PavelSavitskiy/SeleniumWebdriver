@@ -20,11 +20,11 @@ public class PasswordChangePage extends Page {
         clickElements(LocatorsHolder.PASSWORD_SAVE_BUTTON);
     }
 
-    public PasswordChangePage changePassword(String password, String newPassword) {
-        this.fillInOldPasswordField(password);
-        this.fillINewPasswordField(newPassword);
-        this.retryNewPasswordField(newPassword);
-        this.savePasswordAfterChange();
-        return this;
+    public LoginPage changePassword(String password, String newPassword) {
+        fillInOldPasswordField(password);
+        fillINewPasswordField(newPassword);
+        retryNewPasswordField(newPassword);
+        savePasswordAfterChange();
+        return new LoginPage();
     }
 }
