@@ -6,11 +6,11 @@ import com.epam.cdp.kzta2020.business.objects.User;
 public abstract class Users {
     private static PropertiesReader confPropReader = new PropertiesReader();
 
-    private static String login = confPropReader.getProperties("user1Login");
-    private static String password = confPropReader.getProperties("user1Password");
-    private static String newPassword = confPropReader.getProperties("user1NewPassword");
-    private static String firstName = confPropReader.getProperties("user1FirstName");
-    private static String lastName = confPropReader.getProperties("user1LastName");
+    private static String login = confPropReader.getProperties("user1.login");
+    private static String password = confPropReader.getProperties("user1.password");
+    private static String newPassword = confPropReader.getProperties("user1.newPassword");
+    private static String firstName = confPropReader.getProperties("user1.firstName");
+    private static String lastName = confPropReader.getProperties("user1.lastName");
 
     public static User user1;
 

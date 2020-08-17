@@ -1,5 +1,6 @@
 package com.epam.cdp.kzta2020.elements;
 
+import com.epam.cdp.kzta2020.utils.Timeouts;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
@@ -9,15 +10,18 @@ import org.openqa.selenium.Rectangle;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
-
 import static com.epam.cdp.kzta2020.pages.Page.getDriver;
+import static com.epam.cdp.kzta2020.pages.Page.getWebElement;
 
 public class ElementWrapper implements WebElement {
-    private final WebElement webElement;
+    private  WebElement webElement;
 
-    public ElementWrapper(WebElement webElement) {
+    public ElementWrapper(By locator,WebElement webElement) {
+        new WebDriverWait(getDriver(), Timeouts.ORDINARY_WAITING.getSeconds()).until
+                (d -> d.findElement(locator));
         this.webElement = webElement;
     }
 
@@ -38,11 +42,12 @@ public class ElementWrapper implements WebElement {
     public void dragAndDrop(By locator, int x, int y) {
         ((JavascriptExecutor) getDriver()).executeScript(
                 "arguments[0].style.border ='10px solid pink'", webElement);
-        new Actions(getDriver()).dragAndDropBy(getDriver().findElement(locator), x, y).build().perform();
+        new Actions(getDriver()).dragAndDropBy(getWebElement(locator), x, y).build().perform();
     }
 
     @Override
     public WebElement findElement(By by) {
+
         return webElement.findElement(by);
     }
 

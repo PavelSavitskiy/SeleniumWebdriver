@@ -6,8 +6,8 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.util.List;
+import static com.epam.cdp.kzta2020.utils.Timeouts.ORDINARY_WAITING;
 
 public class SearchPage extends Page {
 
@@ -18,7 +18,7 @@ public class SearchPage extends Page {
 
     public SearchPage addGoods(By linkToGoodsFromList) {
         clickElements(linkToGoodsFromList);
-        new WebDriverWait(getDriver(), 10).until(ExpectedConditions.elementToBeClickable(
+        new WebDriverWait(getDriver(), ORDINARY_WAITING.getSeconds()).until(ExpectedConditions.elementToBeClickable(
                 LocatorsHolder.ADD_TO_CART_BUTTON));
         clickElements(LocatorsHolder.ADD_TO_CART_BUTTON);
         clickElements(LocatorsHolder.CLOSE_CART_DIALOG_WINDOW);
@@ -33,13 +33,13 @@ public class SearchPage extends Page {
 
     public List<WebElement> getResults() {
         waitAllElementsPresent(LocatorsHolder.SEARCH_RESULTS);
-        return getDriver().findElements(LocatorsHolder.SEARCH_RESULTS);
+        return getWebElements(LocatorsHolder.SEARCH_RESULTS);
     }
 
     public List<WebElement> getPreciseQuantityOfResults(int quantity) {
         waitAllElementsPresent(LocatorsHolder.SEARCH_RESULTS);
         waitPreciseQuantityOfElementsOnPage(LocatorsHolder.SEARCH_RESULTS, quantity);
-        return getDriver().findElements(LocatorsHolder.SEARCH_RESULTS);
+        return getWebElements(LocatorsHolder.SEARCH_RESULTS);
     }
 
 
@@ -48,7 +48,7 @@ public class SearchPage extends Page {
                 replaceAll("(\\s|\\.|[а-я])", ""));
         double secondPrice = Double.parseDouble((getText(secondGoods)).
                 replaceAll("(\\s|\\.|[а-я])", ""));
-        return (firstPrice > secondPrice);
+        return (firstPrice >= secondPrice);
     }
 
     public static By chooseGoodsFromListAfterSearch(List list) {   //where "number" is ordinal number of goods on the search page
@@ -73,7 +73,7 @@ public class SearchPage extends Page {
         double rightPrice;
         while (true) {
             try {
-                leftPrice = Integer.parseInt((new WebDriverWait(getDriver(), 10).until
+                leftPrice = Integer.parseInt((new WebDriverWait(getDriver(), ORDINARY_WAITING.getSeconds()).until
                         (d -> d.findElement((LocatorsHolder.PRICE_ABOVE_PRICE_FILTER_LEFT)).getAttribute("value"))));
                 break;
             } catch (StaleElementReferenceException e) {
@@ -81,7 +81,7 @@ public class SearchPage extends Page {
         }
         while (true) {
             try {
-                rightPrice = Integer.parseInt((new WebDriverWait(getDriver(), 10).until
+                rightPrice = Integer.parseInt((new WebDriverWait(getDriver(), ORDINARY_WAITING.getSeconds()).until
                         (d -> d.findElement((LocatorsHolder.PRICE_ABOVE_PRICE_FILTER_RIGHT)).getAttribute("value"))));
                 break;
             } catch (StaleElementReferenceException e) {

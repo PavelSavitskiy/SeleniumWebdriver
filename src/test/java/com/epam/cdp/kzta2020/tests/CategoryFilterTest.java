@@ -19,15 +19,15 @@ public class CategoryFilterTest extends BasicTest {
     public void chooseGoodsThroughDifferentFilters(@Optional("Стругацкий") String authorName) {
         mainPage.navigateMousePointerToElement(LocatorsHolder.BOOKS_CATEGORY);
         searchPage = mainPage.chooseCategoryOrSubCategory(LocatorsHolder.FANTASY_BOOK_SUB_CATEGORY);
-        searchPage.getDriver().findElement(LocatorsHolder.FILTER_SOON_ON_SALE_CHECKBOX);
+        searchPage.waitForElementPresent((LocatorsHolder.FILTER_SOON_ON_SALE_CHECKBOX));
         searchPage.chooseFilterWithInputField(LocatorsHolder.FIRST_FILTER_INPUT, authorName,
                 SearchPage.chooseAuthorAfterFillingInFilterInputForm(authorName));
         searchPage.waitForElementPresent(LocatorsHolder.FILTER_AUTHOR_BUTTON);
         searchPage.clickElements(LocatorsHolder.FILTER_IS_IN_STOCK_CHECK_BOX);
         searchPage.waitForElementPresent(LocatorsHolder.FILTER_IS_IN_STOCK_BUTTON);
         quantityOfGoodsOnPage = searchPage.getResults().size();
-        inStockFilter = searchPage.getDriver().findElements((LocatorsHolder.IN_STOCK_LABEL)).size();
-        authorFilter = searchPage.getDriver().findElements((SearchPage.getElementsLocatorWithAuthorLabel(authorName))).size();
+        inStockFilter = searchPage.getWebElements((LocatorsHolder.IN_STOCK_LABEL)).size();
+        authorFilter = searchPage.getWebElements((SearchPage.getElementsLocatorWithAuthorLabel(authorName))).size();
     }
 
     @Test(description = "Check that is-stock filter works properly")
@@ -44,7 +44,7 @@ public class CategoryFilterTest extends BasicTest {
 
     @Parameters({"goods-nearer-to-head-of-list", "goods-nearer-to-end-of-list"})
     @Test(description = "Check price down sorting", dependsOnMethods = "inStockFilterTest", alwaysRun = true)
-    public void comparePricesAfterSorting(@Optional("1") int num1, @Optional("2") int num2) {
+    public void comparePricesAfterSorting(@Optional("3") int num1, @Optional("4") int num2) {
         searchPage.navigateMousePointerToElement(LocatorsHolder.SORT_DROP_DOWN_MENU);
         searchPage.clickElements(LocatorsHolder.SORT_DOWN_PRICE_SUB_MENU);
         Assert.assertTrue(searchPage.compareGoodsSortedByPriceReduction

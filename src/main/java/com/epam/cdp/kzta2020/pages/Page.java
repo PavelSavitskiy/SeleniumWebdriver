@@ -55,11 +55,11 @@ public abstract class Page {
     public void clickElements(By locator) {
         while (true) {
             try {
-                webElement = waitForElementPresent(locator);
-                webElement = new ElementWrapper(webElement);
+                webElement = new ElementWrapper(locator, waitForElementPresent(locator));
                 webElement.click();
                 break;
             } catch (StaleElementReferenceException | ElementNotVisibleException | NotFoundException exception) {
+                exception.printStackTrace();
             }
         }
     }
@@ -67,29 +67,28 @@ public abstract class Page {
     public void clickElementsJavaScript(By locator) {
         waitForElementPresent(locator);
         ((JavascriptExecutor) getDriver()).executeScript(
-                "arguments[0].click()", getDriver().findElement(locator));
+                "arguments[0].click()", getWebElement(locator));
     }
 
-    public void sendKeysToElement(By locator, String string) {
-        webElement = waitForElementPresent(locator);
-        webElement = new ElementWrapper(webElement);
-        webElement.sendKeys(string);
-    }
 
     public void navigateMousePointerToElement(By locator) {
         Actions mouseHover = new Actions(getDriver());
         waitForElementPresent(locator);
-        mouseHover.moveToElement(getDriver().findElement(locator)).perform();
+        mouseHover.moveToElement(getWebElement(locator)).perform();
     }
 
     public void dragAndDropElements(By locator, int x, int y) {
-        webElement = waitForElementPresent(locator);
-        webElement = new ElementWrapper(webElement);
+        webElement = new ElementWrapper(locator, waitForElementPresent(locator));
         ((ElementWrapper) webElement).dragAndDrop(locator, x, y);
     }
 
     public boolean isElementPresent(By locator) {
-        return (getDriver().findElements(locator).size() > 0);
+        return (getWebElements(locator).size() > 0);
+    }
+
+    public void sendKeysToElement(By locator, String string) {
+        webElement = new ElementWrapper(locator, waitForElementPresent(locator));
+        webElement.sendKeys(string);
     }
 
     public WebElement waitForElementPresent(By locator) {
@@ -104,7 +103,7 @@ public abstract class Page {
         new WebDriverWait(getDriver(), Timeouts.ORDINARY_WAITING.getSeconds()).until(ExpectedConditions.numberOfElementsToBeMoreThan(locator, quantity));
     }
 
-    public static By getLocator(User user) {
+    public static By getUserPersonalDataLocator(User user) {
         return By.xpath("//span[contains (text(), '" + user.getPersonalData() + "')]");
     }
 
@@ -112,17 +111,27 @@ public abstract class Page {
         int quantityOfGoodsOnPage;
         int ordinalNumber;
         quantityOfGoodsOnPage = list.size();
-        ordinalNumber = new Random().nextInt(quantityOfGoodsOnPage) + 1;
+        ordinalNumber = getRandomNumber(quantityOfGoodsOnPage);
         return ordinalNumber;
     }
 
+    private static int getRandomNumber(int number) {
+        return new Random().nextInt(number) + 1;
+    }
+
     public static String getText(By locator) {
-        return getDriver().findElement(locator).getText();
+        return getWebElement(locator).getText();
     }
 
     public boolean isUserVisible(User user) {
-        if (isElementPresent(getLocator(user)))
-            return true;
-        else return false;
+        return isElementPresent(getUserPersonalDataLocator(user));
+    }
+
+    public static WebElement getWebElement(By locator) {
+        return getDriver().findElement(locator);
+    }
+
+    public List<WebElement> getWebElements(By locator) {
+        return getDriver().findElements(locator);
     }
 }
