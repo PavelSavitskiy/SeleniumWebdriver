@@ -11,7 +11,6 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.util.List;
 import static com.epam.cdp.kzta2020.pages.Page.getDriver;
 import static com.epam.cdp.kzta2020.pages.Page.getWebElement;
@@ -19,10 +18,8 @@ import static com.epam.cdp.kzta2020.pages.Page.getWebElement;
 public class ElementWrapper implements WebElement {
     private  WebElement webElement;
 
-    public ElementWrapper(By locator,WebElement webElement) {
-        new WebDriverWait(getDriver(), Timeouts.ORDINARY_WAITING.getSeconds()).until
-                (d -> d.findElement(locator));
-        this.webElement = webElement;
+    public ElementWrapper(By locator) {
+        this.webElement = new WebDriverWait(getDriver(), Timeouts.ORDINARY_WAITING.getSeconds()).until(d -> d.findElement(locator));;
     }
 
     public void click() {

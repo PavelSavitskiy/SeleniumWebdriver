@@ -55,7 +55,7 @@ public abstract class Page {
     public void clickElements(By locator) {
         while (true) {
             try {
-                webElement = new ElementWrapper(locator, waitForElementPresent(locator));
+                webElement = new ElementWrapper(locator);
                 webElement.click();
                 break;
             } catch (StaleElementReferenceException | ElementNotVisibleException | NotFoundException exception) {
@@ -78,7 +78,7 @@ public abstract class Page {
     }
 
     public void dragAndDropElements(By locator, int x, int y) {
-        webElement = new ElementWrapper(locator, waitForElementPresent(locator));
+        webElement = new ElementWrapper(locator);
         ((ElementWrapper) webElement).dragAndDrop(locator, x, y);
     }
 
@@ -87,7 +87,7 @@ public abstract class Page {
     }
 
     public void sendKeysToElement(By locator, String string) {
-        webElement = new ElementWrapper(locator, waitForElementPresent(locator));
+        webElement = new ElementWrapper(locator);
         webElement.sendKeys(string);
     }
 
