@@ -21,7 +21,6 @@ import java.util.Random;
 
 public abstract class Page {
     protected static WebDriver driver;
-    private WebElement webElement;
 
     public Page() {
         driver = DriverSingleton.getWebDriverSingleton();
@@ -55,8 +54,7 @@ public abstract class Page {
     public void clickElements(By locator) {
         while (true) {
             try {
-                webElement = new ElementWrapper(locator);
-                webElement.click();
+                new ElementWrapper(locator).click();
                 break;
             } catch (StaleElementReferenceException | ElementNotVisibleException | NotFoundException exception) {
                 exception.printStackTrace();
@@ -70,7 +68,6 @@ public abstract class Page {
                 "arguments[0].click()", getWebElement(locator));
     }
 
-
     public void navigateMousePointerToElement(By locator) {
         Actions mouseHover = new Actions(getDriver());
         waitForElementPresent(locator);
@@ -78,8 +75,7 @@ public abstract class Page {
     }
 
     public void dragAndDropElements(By locator, int x, int y) {
-        webElement = new ElementWrapper(locator);
-        ((ElementWrapper) webElement).dragAndDrop(locator, x, y);
+        new ElementWrapper(locator).dragAndDrop(locator, x, y);
     }
 
     public boolean isElementPresent(By locator) {
@@ -87,8 +83,7 @@ public abstract class Page {
     }
 
     public void sendKeysToElement(By locator, String string) {
-        webElement = new ElementWrapper(locator);
-        webElement.sendKeys(string);
+        new ElementWrapper(locator).sendKeys(string);
     }
 
     public WebElement waitForElementPresent(By locator) {
