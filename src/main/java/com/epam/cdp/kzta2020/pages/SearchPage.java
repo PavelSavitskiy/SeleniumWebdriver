@@ -6,7 +6,9 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.util.List;
+
 import static com.epam.cdp.kzta2020.utils.Timeouts.ORDINARY_WAITING;
 
 public class SearchPage extends Page {

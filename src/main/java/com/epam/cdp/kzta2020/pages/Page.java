@@ -5,10 +5,7 @@ import com.epam.cdp.kzta2020.elements.ElementWrapper;
 import com.epam.cdp.kzta2020.locators.LocatorsHolder;
 import com.epam.cdp.kzta2020.webdriver.DriverSingleton;
 import org.openqa.selenium.By;
-import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.NotFoundException;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -21,6 +18,7 @@ import java.util.Random;
 
 public abstract class Page {
     protected static WebDriver driver;
+    private static final String FORMATTED_STRING_FOR_PERSONAL_DATA = "//span[contains (text(), '%s')]";
 
     public Page() {
         driver = DriverSingleton.getWebDriverSingleton();
@@ -52,14 +50,7 @@ public abstract class Page {
     }
 
     public void clickElements(By locator) {
-        while (true) {
-            try {
-                new ElementWrapper(locator).click();
-                break;
-            } catch (StaleElementReferenceException | ElementNotVisibleException | NotFoundException exception) {
-                exception.printStackTrace();
-            }
-        }
+        new ElementWrapper(locator).click();
     }
 
     public void clickElementsJavaScript(By locator) {
@@ -86,8 +77,8 @@ public abstract class Page {
         new ElementWrapper(locator).sendKeys(string);
     }
 
-    public WebElement waitForElementPresent(By locator) {
-        return new WebDriverWait(getDriver(), Timeouts.ORDINARY_WAITING.getSeconds()).until(d -> d.findElement(locator));
+    public void waitForElementPresent(By locator) {
+        new WebDriverWait(getDriver(), Timeouts.ORDINARY_WAITING.getSeconds()).until(d -> d.findElement(locator));
     }
 
     public void waitAllElementsPresent(By locator) {
@@ -99,7 +90,7 @@ public abstract class Page {
     }
 
     public static By getUserPersonalDataLocator(User user) {
-        return By.xpath("//span[contains (text(), '" + user.getPersonalData() + "')]");
+        return By.xpath(String.format(FORMATTED_STRING_FOR_PERSONAL_DATA, user.getPersonalData()));
     }
 
     public static int randomOrdinalNumberOfGoodsOnPage(List list) {

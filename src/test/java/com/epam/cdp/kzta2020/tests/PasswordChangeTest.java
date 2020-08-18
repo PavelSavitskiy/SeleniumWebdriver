@@ -10,8 +10,8 @@ import static com.epam.cdp.kzta2020.utils.Users.user1;
 
 public class PasswordChangeTest extends BasicTest {
     private static PropertiesReader confPropReader = new PropertiesReader();
-    private static String password = confPropReader.getProperties("user1Password");
-    private static String newPassword = confPropReader.getProperties("user1NewPassword");
+    private static String password = confPropReader.getProperties("user1.password");
+    private static String newPassword = confPropReader.getProperties("user1.newPassword");
 
     @BeforeClass(description = "Login")
     public void loginBeforeTest() {
