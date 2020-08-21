@@ -38,7 +38,7 @@ public class SearchPage extends Page {
         return getWebElements(LocatorsHolder.SEARCH_RESULTS);
     }
 
-    public List<WebElement> getPreciseQuantityOfResults(int quantity) {
+    public List<WebElement> waitAndGetPreciseQuantityOfResults(int quantity) {
         waitAllElementsPresent(LocatorsHolder.SEARCH_RESULTS);
         waitPreciseQuantityOfElementsOnPage(LocatorsHolder.SEARCH_RESULTS, quantity);
         return getWebElements(LocatorsHolder.SEARCH_RESULTS);

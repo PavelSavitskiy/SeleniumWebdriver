@@ -23,24 +23,27 @@ public class CategoryFilterTest extends BasicTest {
         searchPage.chooseFilterWithInputField(LocatorsHolder.FIRST_FILTER_INPUT, authorName,
                 SearchPage.chooseAuthorAfterFillingInFilterInputForm(authorName));
         searchPage.waitForElementPresent(LocatorsHolder.FILTER_AUTHOR_BUTTON);
-        searchPage.clickElements(LocatorsHolder.FILTER_IS_IN_STOCK_CHECK_BOX);
-        searchPage.waitForElementPresent(LocatorsHolder.FILTER_IS_IN_STOCK_BUTTON);
-        quantityOfGoodsOnPage = searchPage.getResults().size();
-        inStockFilter = searchPage.getWebElements((LocatorsHolder.IN_STOCK_LABEL)).size();
+    }
+
+    @Parameters({"author-name"})
+    @Test(description = "Check that author filter works properly", dependsOnMethods = "comparePricesAfterSorting", alwaysRun = true)
+    public void authorFilterTest(@Optional("Стругацкий") String authorName) {
         authorFilter = searchPage.getWebElements((SearchPage.getElementsLocatorWithAuthorLabel(authorName))).size();
+        quantityOfGoodsOnPage = searchPage.getResults().size();
+        Assert.assertEquals(quantityOfGoodsOnPage, authorFilter,
+                "Not all goods sorted by chosen author");
     }
 
     @Test(description = "Check that is-stock filter works properly")
     public void inStockFilterTest() {
+        searchPage.clickElements(LocatorsHolder.FILTER_IS_IN_STOCK_CHECK_BOX);
+        searchPage.waitForElementPresent(LocatorsHolder.FILTER_IS_IN_STOCK_BUTTON);
+        inStockFilter = searchPage.getWebElements((LocatorsHolder.IN_STOCK_LABEL)).size();
+        quantityOfGoodsOnPage = searchPage.getResults().size();
         Assert.assertEquals(quantityOfGoodsOnPage, inStockFilter,
                 "Not all goods sorted by in-stock filter");
     }
 
-    @Test(description = "Check that author filter works properly", dependsOnMethods = "comparePricesAfterSorting", alwaysRun = true)
-    public void authorFilterTest() {
-        Assert.assertEquals(quantityOfGoodsOnPage, authorFilter,
-                "Not all goods sorted by chosen author");
-    }
 
     @Parameters({"goods-nearer-to-head-of-list", "goods-nearer-to-end-of-list"})
     @Test(description = "Check price down sorting", dependsOnMethods = "inStockFilterTest", alwaysRun = true)

@@ -11,8 +11,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
 public abstract class BasicTest {
-    LoginPage loginPage;
-    MainPage mainPage;
+    protected LoginPage loginPage;
+    protected MainPage mainPage;
     UserSectionPage userSectionPage;
     PasswordChangePage passwordChangePage;
     SearchPage searchPage;

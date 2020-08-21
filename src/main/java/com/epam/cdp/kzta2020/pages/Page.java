@@ -118,6 +118,7 @@ public abstract class Page {
     }
 
     public List<WebElement> getWebElements(By locator) {
+        waitAllElementsPresent(locator);
         return getDriver().findElements(locator);
     }
 }

@@ -21,7 +21,7 @@ public class DriverSingleton {
     }
 
     public static WebDriver getWebDriverSingleton() {
-        if (webDriverSingleton != null) return webDriverSingleton;
+        if (webDriverSingleton != null){ return webDriverSingleton;}
         else return webDriverSingleton = init();
     }
 
@@ -46,7 +46,6 @@ public class DriverSingleton {
         }
         setDriverTimeOut(ORDINARY_WAITING);
         webDriverSingleton.manage().window().maximize();
-        webDriverSingleton.get(confPropReader.getProperties("homepageFlipKz"));
         return webDriverSingleton;
     }
 

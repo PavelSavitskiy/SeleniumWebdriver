@@ -5,7 +5,7 @@
         <classes>
             <class name="com.epam.cdp.kzta2020.tests.LogInTest"/>
 
-            <class name="com.epam.cdp.kzta2020.tests.SearchPageTest" >
+            <class name="com.epam.cdp.kzta2020.tests.SearchTest" >
                 <parameter name="request" value="Пазлы"/>
             </class>
 
