@@ -1,10 +1,8 @@
 package com.epam.cdp.kzta2020.steps;
 
-import com.epam.cdp.kzta2020.utils.PropertiesReader;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
 import static com.epam.cdp.kzta2020.utils.Users.user1;
@@ -25,6 +23,5 @@ public class LoginTest extends BasicCucumber {
     @When("^user click to Sign In button$")
     public void user_click_to_Sign_In_button() {
         mainPage.goToLoginPage();
-
     }
 }
