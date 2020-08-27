@@ -46,6 +46,7 @@ public class DriverSingleton {
         }
         setDriverTimeOut(ORDINARY_WAITING);
         webDriverSingleton.manage().window().maximize();
+        webDriverSingleton.get(confPropReader.getProperties("homepageFlipKz"));
         return webDriverSingleton;
     }
 
@@ -55,5 +56,6 @@ public class DriverSingleton {
 
     public static void quiteBrowser() {
         webDriverSingleton.quit();
+        webDriverSingleton=null;
     }
 }

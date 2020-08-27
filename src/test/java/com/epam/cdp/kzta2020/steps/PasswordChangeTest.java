@@ -14,7 +14,7 @@ public class PasswordChangeTest extends BasicCucumber {
 
     @When("^user goes to user section$")
     public void user_goes_to_user_section() {
-      mainPage.goToUserSectionPage();
+        mainPage.goToUserSectionPage();
     }
 
     @And("^goes to change password sub section$")
@@ -30,7 +30,7 @@ public class PasswordChangeTest extends BasicCucumber {
 
     @And("^user signs out$")
     public void user_signs_out() {
-        passwordChangePage.logOut();
+        passwordChangePage.logOut(user1);
     }
 
     @Then("^he can sign in with new one$")
@@ -43,5 +43,4 @@ public class PasswordChangeTest extends BasicCucumber {
     public void password_is_changed_to_old_one() {
         mainPage.goToUserSectionPage().chooseChangePasswordSubSection().changePassword(newPassword, password);
     }
-
 }

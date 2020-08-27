@@ -13,8 +13,6 @@ public class MainPage extends Page {
         clickElementsJavaScript(LocatorsHolder.SEARCH_BUTTON);
         clearSearchInput();
         return new SearchPage();
-
-
     }
 
     public SearchPage chooseCategoryOrSubCategory(By locator) {

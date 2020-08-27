@@ -7,7 +7,7 @@ import com.epam.cdp.kzta2020.pages.SearchPage;
 import com.epam.cdp.kzta2020.pages.UserSectionPage;
 
 public abstract class BasicCucumber {
-    LoginPage loginPage = new LoginPage();;
+    LoginPage loginPage = new LoginPage();
     MainPage mainPage = new MainPage();
     UserSectionPage userSectionPage = new UserSectionPage();
     PasswordChangePage passwordChangePage = new PasswordChangePage();

@@ -3,9 +3,8 @@ package com.epam.cdp.kzta2020.steps;
 import com.epam.cdp.kzta2020.locators.LocatorsHolder;
 import com.epam.cdp.kzta2020.pages.SearchPage;
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-
 import org.testng.Assert;
 
 
@@ -14,7 +13,7 @@ public class CategoryFilterTest extends BasicCucumber {
     private int authorFilter;
     private int inStockFilter;
 
-    @And("^user navigates to books category$")
+    @Given("^user navigates to books category$")
     public void user_navigates_to_books_category() {
         mainPage.navigateMousePointerToElement(LocatorsHolder.BOOKS_CATEGORY);
     }
@@ -40,7 +39,7 @@ public class CategoryFilterTest extends BasicCucumber {
                 "Not all goods sorted by chosen author");
     }
 
-    @When("^user checks In Stock filter checkbox$")
+    @And("^user checks In Stock filter checkbox$")
     public void user_checks_in_stock_filter_checkbox() {
         searchPage.clickElements(LocatorsHolder.FILTER_IS_IN_STOCK_CHECK_BOX);
     }
@@ -54,9 +53,8 @@ public class CategoryFilterTest extends BasicCucumber {
                 "Not all goods sorted by in-stock filter");
     }
 
-    @When("^user navigates to sort drop down menu$")
+    @And("^user navigates to sort drop down menu$")
     public void user_navigates_to_sort_drop_down_menu() {
-        //TODO get rid of duplicate here
         searchPage.navigateMousePointerToElement(LocatorsHolder.SORT_DROP_DOWN_MENU);
         searchPage.navigateMousePointerToElement(LocatorsHolder.SORT_DROP_DOWN_MENU);
     }

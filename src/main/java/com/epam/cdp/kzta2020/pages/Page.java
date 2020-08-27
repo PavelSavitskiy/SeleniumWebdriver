@@ -4,6 +4,7 @@ import com.epam.cdp.kzta2020.business.objects.User;
 import com.epam.cdp.kzta2020.elements.ElementWrapper;
 import com.epam.cdp.kzta2020.locators.LocatorsHolder;
 import com.epam.cdp.kzta2020.webdriver.DriverSingleton;
+import cucumber.api.java.it.Ma;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -15,6 +16,10 @@ import com.epam.cdp.kzta2020.utils.Timeouts;
 
 import java.util.List;
 import java.util.Random;
+
+import static com.epam.cdp.kzta2020.utils.Timeouts.ORDINARY_WAITING;
+import static com.epam.cdp.kzta2020.utils.Timeouts.ZERO_WAITING;
+import static com.epam.cdp.kzta2020.webdriver.DriverSingleton.setDriverTimeOut;
 
 public abstract class Page {
     protected static WebDriver driver;
@@ -43,10 +48,13 @@ public abstract class Page {
         return new LoginPage();
     }
 
-    public MainPage logOut() {
-        navigateMousePointerToElement(LocatorsHolder.USER_SECTION);
-        clickElements(LocatorsHolder.LOGOUT_BUTTON);
-        return new MainPage();
+    public MainPage logOut(User user) {
+        if(isUserVisible(user)) {
+            navigateMousePointerToElement(LocatorsHolder.USER_SECTION);
+            clickElements(LocatorsHolder.LOGOUT_BUTTON);
+            return new MainPage();
+        }
+        else return new MainPage();
     }
 
     public void clickElements(By locator) {
@@ -110,7 +118,10 @@ public abstract class Page {
     }
 
     public boolean isUserVisible(User user) {
-        return isElementPresent(getUserPersonalDataLocator(user));
+        setDriverTimeOut(ZERO_WAITING);
+        boolean isPresent = isElementPresent(getUserPersonalDataLocator(user));
+        setDriverTimeOut(ORDINARY_WAITING);
+        return isPresent;
     }
 
     public static WebElement getWebElement(By locator) {

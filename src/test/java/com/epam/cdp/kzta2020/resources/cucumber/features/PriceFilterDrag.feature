@@ -1,8 +1,6 @@
 Feature: goods are on price bounds after price filter applying
 
   Scenario Outline: user moves price filter slider and goods on page measure up to the price bounds
-    Given user opens browser
-    And the link is opened in browser
     When  user sends a request in the search form "<request>"
     And moves right price filter slider point "<xOffsetRight>" "<yOffsetRight>"
     And moves left price filter slider point "<xOffsetLeft>" "<yOffsetLeft>"

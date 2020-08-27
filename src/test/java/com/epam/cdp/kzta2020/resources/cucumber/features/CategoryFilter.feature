@@ -1,9 +1,7 @@
 Feature: Check category filtration
 
   Background:
-    Given user opens browser
-    And the link is opened in browser
-    And user navigates to books category
+    Given user navigates to books category
     And user navigates to fantasy sub category
     And enters author name in author filter form and choose first offered result "Кинг"
 
