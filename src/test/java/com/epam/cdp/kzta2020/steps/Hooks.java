@@ -12,6 +12,6 @@ public class Hooks {
 
     @After
     public void quitBrowser() {
-        DriverSingleton.quiteBrowser();
+        DriverSingleton.quitBrowser();
     }
 }

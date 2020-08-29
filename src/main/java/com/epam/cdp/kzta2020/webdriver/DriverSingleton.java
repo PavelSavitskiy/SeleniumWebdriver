@@ -54,7 +54,7 @@ public class DriverSingleton {
         getWebDriverSingleton().manage().timeouts().implicitlyWait(timeOut.getSeconds(), TimeUnit.SECONDS);
     }
 
-    public static void quiteBrowser() {
+    public static void quitBrowser() {
         webDriverSingleton.quit();
         webDriverSingleton=null;
     }

@@ -22,6 +22,6 @@ public class SearchTest extends BasicCucumber {
 
     @Then("^close browser$")
     public void close_browser() {
-        DriverSingleton.quiteBrowser();
+        DriverSingleton.quitBrowser();
     }
 }
