@@ -32,7 +32,7 @@ public class RestAssuredTest {
     }
 
     @BeforeMethod
-    public void choseCartPage() {
+    public void chooseCartPage() {
         response = given().get(cartSection).andReturn();
     }
 
