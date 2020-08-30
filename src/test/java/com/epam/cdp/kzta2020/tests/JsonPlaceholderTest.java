@@ -45,9 +45,10 @@ public class JsonPlaceholderTest {
         }
     }
 
-    @Test
+    @Test(description = "Confirm that quantity of users is correct")
     public void checkResponseBody()  {
         int actualUsersQuantity = parseJsonToObjects(response).length;
-        Assert.assertEquals(actualUsersQuantity , expectedUsersQuantity);
+        Assert.assertEquals(actualUsersQuantity , expectedUsersQuantity,
+                "The quantity of users differs from expected one");
     }
 }
