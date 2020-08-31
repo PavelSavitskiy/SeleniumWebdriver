@@ -1,19 +1,14 @@
 package com.epam.cdp.kzta2020.tests;
 
-import com.epam.cdp.kzta2020.parsed.objects.Link;
 import com.epam.cdp.kzta2020.utils.PropertiesReader;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-
+import static com.epam.cdp.kzta2020.utils.ResponseUtils.getListOfLinksOnPage;
 import static io.restassured.RestAssured.given;
 
 public class RestAssuredTest {
@@ -59,19 +54,7 @@ public class RestAssuredTest {
 
     @Test
     public void checkLinksQuantity() {
-        Document document = Jsoup.parse(response.asString());
-        ArrayList<Link> links = new ArrayList<>();
-        int counter = 1;
-        for (Element element : document.getElementsByAttribute("href")) {
-            if (!element.text().equals("")) {
-                links.add(new Link(element.text(), counter));
-                counter++;
-            }
-        }
-        for (Link link : links) {
-            System.out.println(link.toString());
-        }
-        Assert.assertEquals(links.size(), expectedLinksQuantity,
+        Assert.assertEquals(getListOfLinksOnPage(response).size(), expectedLinksQuantity,
                 "Quantity of links on page is incorrect ");
     }
 }

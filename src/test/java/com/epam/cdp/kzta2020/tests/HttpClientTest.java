@@ -1,7 +1,6 @@
 package com.epam.cdp.kzta2020.tests;
 
 import com.epam.cdp.kzta2020.utils.PropertiesReader;
-import org.apache.http.Header;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -12,6 +11,8 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
+import static com.epam.cdp.kzta2020.utils.ResponseUtils.checkHeadersValue;
+
 public class HttpClientTest {
     private CloseableHttpResponse response;
     private String cartSection = "/cart";
@@ -21,23 +22,13 @@ public class HttpClientTest {
     private int expectedStatusCode = 200;
     private static PropertiesReader confPropReader = new PropertiesReader();
 
-    public static boolean checkHeadersValue(CloseableHttpResponse response, String key, String currentConnection) {
-        Header[] connectionHeader = response.getAllHeaders();
-        for (Header header : connectionHeader) {
-            if (header.toString().contains(key)) {
-                if (header.toString().contains(currentConnection))
-                    return true;
-                break;
-            }
-        }
-        return false;
-    }
+
     @BeforeMethod
-    public void initHttpClient()  {
+    public void initHttpClient() {
         CloseableHttpClient httpclient = HttpClients.createDefault();
         HttpGet httpGet = new HttpGet(flipDomain + cartSection);
         try {
-            response =httpclient.execute(httpGet);
+            response = httpclient.execute(httpGet);
         } catch (IOException e) {
             e.printStackTrace();
         }
