@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" name="Rest-Api">
+        <classes>
+            <class name="com.epam.cdp.kzta2020.tests.HttpClientTest"/>
+            <class name="com.epam.cdp.kzta2020.tests.JsonPlaceholderTest"/>
+            <class name="com.epam.cdp.kzta2020.tests.RestAssuredTest"/>
+        </classes>
+    </test>
+</suite>
