@@ -28,7 +28,7 @@ public class OrdinaryUser implements User {
     }
 
     public void setPassword(String newPassword) {
-        password =newPassword;
+        password = newPassword;
     }
 
     public static class OrdinaryUserBuilder {
@@ -55,9 +55,14 @@ public class OrdinaryUser implements User {
         }
 
         public OrdinaryUserBuilder build() throws Exception {
-                if(!(this.getPersonalData().matches("(\\w*[^\\d*])\\s(\\w*[^\\d*])")))
-            throw new Exception("Name or lastname can't contain figures or special signs");
+            if (!(this.getPersonalData().matches("(\\w*[^\\d*])\\s(\\w*[^\\d*])")))
+                throw new Exception("Name or lastname can't contain figures or special signs");
             else return this;
         }
+    }
+
+    @Override
+    public String toString() {
+        return firstName + " " + lastName;
     }
 }

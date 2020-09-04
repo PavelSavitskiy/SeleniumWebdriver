@@ -1,6 +1,7 @@
 package com.epam.cdp.kzta2020.pages;
 
 import com.epam.cdp.kzta2020.locators.LocatorsHolder;
+import com.epam.cdp.kzta2020.reporting.TestExecutionLogger;
 
 public class PasswordChangePage extends Page {
 
@@ -21,6 +22,7 @@ public class PasswordChangePage extends Page {
     }
 
     public LoginPage changePassword(String password, String newPassword) {
+        TestExecutionLogger.info("Change password from: "+password+" to: " +newPassword);
         fillInOldPasswordField(password);
         fillINewPasswordField(newPassword);
         retryNewPasswordField(newPassword);

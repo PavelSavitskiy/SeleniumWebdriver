@@ -2,6 +2,7 @@ package com.epam.cdp.kzta2020.pages;
 
 import com.epam.cdp.kzta2020.business.objects.User;
 import com.epam.cdp.kzta2020.locators.LocatorsHolder;
+import com.epam.cdp.kzta2020.reporting.TestExecutionLogger;
 
 public class LoginPage extends Page {
 
@@ -18,6 +19,7 @@ public class LoginPage extends Page {
     }
 
     public LoginPage signIn(User user) {
+        TestExecutionLogger.info("Signing in for user: " + user);
         fillInLoginForm(user);
         fillInPasswordForm(user);
         clickLoginSubmit();

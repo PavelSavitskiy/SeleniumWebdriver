@@ -6,7 +6,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class SearchPageTest extends BasicTest {
-    private static final int ITEMS_ON_SEARCH_PAGE_QUANTITY = 60;
+    private static final int ITEMS_ON_SEARCH_PAGE_QUANTITY = 69;
     private static final int WAIT_PRECISE_QUANTITY_OF_ITEMS_ON_SEARCH_PAGE = 59;
     private int results;
 
