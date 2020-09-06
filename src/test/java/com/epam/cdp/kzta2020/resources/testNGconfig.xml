@@ -14,13 +14,13 @@
             </class>
 
             <class name="com.epam.cdp.kzta2020.tests.CategoryFilterTest">
-                <parameter name="goods-nearer-to-head-of-list" value="1"/>
-                <parameter name="goods-nearer-to-end-of-list" value="2"/>
-                <parameter name="author-name" value="Брэдбери"/>
+                <parameter name="goods-nearer-to-head-of-list" value="3"/>
+                <parameter name="goods-nearer-to-end-of-list" value="4"/>
+                <parameter name="author-name" value="Стругацкий"/>
             </class>
-
             <class name="com.epam.cdp.kzta2020.tests.PriceFilterDragTest"/>
             <class name="com.epam.cdp.kzta2020.tests.PasswordChangeTest" />
+
         </classes>
     </test>
 </suite>

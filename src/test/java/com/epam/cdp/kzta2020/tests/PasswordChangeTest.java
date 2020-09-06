@@ -2,7 +2,6 @@ package com.epam.cdp.kzta2020.tests;
 
 import com.epam.cdp.kzta2020.reporting.TestExecutionLogger;
 import com.epam.cdp.kzta2020.utils.PropertiesReader;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -34,8 +33,6 @@ public class PasswordChangeTest extends BasicTest {
 
         assertTrue(mainPage.isUserVisible(user1),
                 "Password wasn't changed properly");
-
-
     }
 
     @AfterClass(description = "Change password to old one", alwaysRun = true)

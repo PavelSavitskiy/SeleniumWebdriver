@@ -4,3 +4,6 @@ target
 DriverWrapper
 build
 screenshots
+logs
+.allure
+allure-results

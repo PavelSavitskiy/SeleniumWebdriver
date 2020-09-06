@@ -18,6 +18,7 @@ public class MainPage extends Page {
     }
 
     public SearchPage chooseCategoryOrSubCategory(By locator) {
+        TestExecutionLogger.info("Going to \""+getWebElement(locator).getText()+"\" sub category");
         clickElements(locator);
         return new SearchPage();
     }

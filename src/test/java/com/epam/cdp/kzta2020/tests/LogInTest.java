@@ -1,9 +1,9 @@
 package com.epam.cdp.kzta2020.tests;
 
 import com.epam.cdp.kzta2020.reporting.TestExecutionLogger;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import static com.epam.cdp.kzta2020.utils.Users.user1;
-import static org.testng.Assert.assertTrue;
 
 public class LogInTest extends BasicTest {
 
@@ -16,7 +16,7 @@ public class LogInTest extends BasicTest {
         } else {
             TestExecutionLogger.error("Log in wasn't completed, smth went wrong!");
         }
-        assertTrue(mainPage.isUserVisible(user1),
+        Assert.assertTrue(mainPage.isUserVisible(user1),
                 "Login wasn't completed");
     }
 }

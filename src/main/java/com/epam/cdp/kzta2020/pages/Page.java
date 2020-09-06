@@ -16,8 +16,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import com.epam.cdp.kzta2020.utils.Timeouts;
-import org.testng.Assert;
-import org.testng.annotations.Test;
 
 import java.io.File;
 import java.io.IOException;
@@ -76,7 +74,7 @@ public abstract class Page {
     public void navigateMousePointerToElement(By locator) {
         Actions mouseHover = new Actions(getDriver());
         waitForElementPresent(locator);
-        TestExecutionLogger.debug("Navigating mouse pointer to element "+ locator.toString());
+        TestExecutionLogger.info("Navigating mouse pointer to element: \""+ getWebElement(locator).getText()+"\"");
         mouseHover.moveToElement(getWebElement(locator)).perform();
     }
 
@@ -95,6 +93,7 @@ public abstract class Page {
     }
 
     public void waitForElementPresent(By locator) {
+        TestExecutionLogger.debug("Waiting for element with locator: \" "+ locator.toString()+"\"");
         new WebDriverWait(getDriver(), Timeouts.ORDINARY_WAITING.getSeconds()).until(d -> d.findElement(locator));
     }
 
@@ -111,6 +110,7 @@ public abstract class Page {
     }
 
     public static int randomOrdinalNumberOfGoodsOnPage(List list) {
+        TestExecutionLogger.info("Choosing random goods from page");
         int quantityOfGoodsOnPage;
         int ordinalNumber;
         quantityOfGoodsOnPage = list.size();

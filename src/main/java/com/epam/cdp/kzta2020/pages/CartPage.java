@@ -1,6 +1,7 @@
 package com.epam.cdp.kzta2020.pages;
 
 import com.epam.cdp.kzta2020.locators.LocatorsHolder;
+import com.epam.cdp.kzta2020.reporting.TestExecutionLogger;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class CartPage extends Page {
         listOfGoods = getWebElements(LocatorsHolder.DELETE_GOODS_BUTTON);
         setDriverTimeOut(ORDINARY_WAITING);
         currentQuantityOfGoods = listOfGoods.size();
+        TestExecutionLogger.info("Counting goods in cart. Quantity = "+currentQuantityOfGoods);
         return this;
     }
 }

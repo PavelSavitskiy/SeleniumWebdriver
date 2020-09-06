@@ -1,6 +1,5 @@
 package com.epam.cdp.kzta2020.tests;
 
-import com.epam.cdp.kzta2020.locators.LocatorsHolder;
 import com.epam.cdp.kzta2020.pages.MainPage;
 import com.epam.cdp.kzta2020.pages.SearchPage;
 import org.testng.Assert;
@@ -8,6 +7,9 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
+
+import static com.epam.cdp.kzta2020.locators.LocatorsHolder.PRICE_FILTER_LEFT_POINT;
+import static com.epam.cdp.kzta2020.locators.LocatorsHolder.PRICE_FILTER_RIGHT_POINT;
 
 public class PriceFilterDragTest extends BasicTest {
     private String request;
@@ -31,9 +33,8 @@ public class PriceFilterDragTest extends BasicTest {
 
     @Test(description = "Confirm, goods are on price bounds after price filter")
     public void priceFilterDrugTest() {
-        mainPage.search(request).dragAndDropElements(LocatorsHolder.PRICE_FILTER_RIGHT_POINT, xOffsetRight, yOffsetRight);
-        searchPage.dragAndDropElements(LocatorsHolder.PRICE_FILTER_LEFT_POINT, xOffsetLeft, yOffsetLeft);
-        searchPage.clickElements(LocatorsHolder.PRICE_FILTER_APPLY_BUTTON);
+        mainPage.search(request).dragPriceFilterSliderPoints
+                (PRICE_FILTER_RIGHT_POINT, PRICE_FILTER_LEFT_POINT, xOffsetRight, yOffsetRight, xOffsetLeft, yOffsetLeft);
         Assert.assertTrue(searchPage.compareActualGoodsPriceWithPriceFilterValue(
                 SearchPage.choosePriceFromListAfterSearch(goodsOrdinalNumber)), "Filter didn't worked as was expected");
     }

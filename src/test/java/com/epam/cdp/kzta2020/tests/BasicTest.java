@@ -50,6 +50,7 @@ public abstract class BasicTest {
     public void takeScreenShotOnFailure(ITestResult testResult) {
         if (testResult.getStatus() == ITestResult.FAILURE) {
             File scrFile = ((TakesScreenshot) getWebDriverSingleton()).getScreenshotAs(OutputType.FILE);
+            TestExecutionLogger.error("Test failed! "+testResult.getThrowable().getMessage());
             try {
                 String screenshotName = SCREENSHOTS_NAME_TPL + System.nanoTime();
                 FileUtils.copyFile(scrFile, new File(screenshotName + "-" + testResult.getName() + "-" + ".jpg"));
@@ -57,6 +58,9 @@ public abstract class BasicTest {
             } catch (IOException e) {
                 TestExecutionLogger.error("Failed to make screenshot");
             }
+        }
+        if (testResult.getStatus() == ITestResult.SUCCESS) {
+            TestExecutionLogger.info("Test passed successfully!");
         }
     }
 }
